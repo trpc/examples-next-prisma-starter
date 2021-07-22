@@ -2,23 +2,47 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  // provider = "postgres"
-  // url      = env("DATABASE_URL")
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+  // provider = "sqlite"
+  // url      = "file:./dev.db"
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model Post {
-  id    String @id @default(uuid())
-  title String
-  text  String
+model Company {
+  id      String  @id @default(uuid())
+  slug    String  @unique
+  logoUrl String?
+  url     String?
 
-  // To return `Date`s intact through the API we need to add data transformers
-  // https://trpc.io/docs/data-transformers
-  // createdAt DateTime @unique @default(now())
-  // updatedAt DateTime @unique @default(now())
+  Job Job[]
+}
+
+model Source {
+  id   String  @id @default(uuid())
+  slug String  @unique
+  url  String?
+  Job  Job[]
+}
+
+model Job {
+  id       String @id @default(uuid())
+  title    String
+  url      String
+  applyUrl String
+  source   Source @relation(fields: [sourceId], references: [id])
+
+  remote      Boolean
+  publishDate DateTime
+
+  company   Company  @relation(fields: [companyId], references: [id])
+  companyId String
+  sourceId  String
+  tags      String[]
+
+  createdAt DateTime @unique @default(now())
+  updatedAt DateTime @unique @default(now())
 }
