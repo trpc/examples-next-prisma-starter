@@ -1,7 +1,10 @@
 {
   "recommendations": [
-    "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "prisma.prisma"
+    "esbenp.prettier-vscode",
+    "yzhang.markdown-all-in-one",
+    "bradlc.vscode-tailwindcss",
+    "heybourn.headwind",
+    "mikestead.dotenv",
   ]
 }
