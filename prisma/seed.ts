@@ -1,14 +1,21 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Source } from '@prisma/client';
 const prisma = new PrismaClient();
 
+const sources: Omit<Source, 'id'>[] = [
+  {
+    slug: 'remoteok',
+    url: 'https://remoteok.io',
+  },
+];
 async function main() {
-  await prisma.source.upsert({
-    where: { slug: 'remoteok.io' },
-    update: {},
-    create: {
-      slug: 'remoteok.io',
-    },
-  });
+  const promises = sources.map((source) =>
+    prisma.source.upsert({
+      where: { slug: source.slug },
+      update: source,
+      create: source,
+    }),
+  );
+  await Promise.all(promises);
 }
 
 main()

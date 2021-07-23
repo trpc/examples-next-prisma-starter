@@ -14,7 +14,7 @@ generator client {
 
 model Company {
   id      String  @id @default(uuid())
-  slug    String  @unique
+  name    String  @unique
   logoUrl String?
   url     String?
 
@@ -29,20 +29,25 @@ model Source {
 }
 
 model Job {
-  id       String @id @default(uuid())
-  title    String
-  url      String
-  applyUrl String
-  source   Source @relation(fields: [sourceId], references: [id])
-
+  id          String   @id @default(uuid())
+  title       String
+  url         String
+  applyUrl    String
+  text        String
   remote      Boolean
   publishDate DateTime
+  tags        String[]
 
-  company   Company  @relation(fields: [companyId], references: [id])
+  company   Company @relation(fields: [companyId], references: [id])
   companyId String
-  sourceId  String
-  tags      String[]
 
-  createdAt DateTime @unique @default(now())
-  updatedAt DateTime @unique @default(now())
+  sourceId  String
+  sourceKey String
+  source    Source @relation(fields: [sourceId], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  deletedAt DateTime?
+
+  @@unique([sourceId, sourceKey])
 }

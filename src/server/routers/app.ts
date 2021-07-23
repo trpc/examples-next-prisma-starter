@@ -3,7 +3,8 @@
  */
 import superjson from 'superjson';
 import { createRouter } from '../trpc';
-import { postsRouter } from './posts';
+import { cronRouter } from './cron';
+import { jobsRouter } from './jobs';
 
 /**
  * Create your application's root router
@@ -22,6 +23,7 @@ export const appRouter = createRouter()
    * @link https://trpc.io/docs/error-formatting
    */
   // .formatError(({ shape, error }) => { })
-  .merge('posts.', postsRouter);
+  .merge('cron.', cronRouter)
+  .merge('jobs.', jobsRouter);
 
 export type AppRouter = typeof appRouter;
