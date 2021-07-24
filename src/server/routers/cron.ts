@@ -6,6 +6,7 @@
 import { Company, Job, Prisma, Source } from '@prisma/client';
 import { Dict } from '@trpc/server';
 import { createRouter, prisma } from 'server/trpc';
+import { alogliaReindex } from 'server/utils/algolia';
 import { fetchJSON } from 'server/utils/fetchJSON';
 import { z } from 'zod';
 const jsonDate = z
@@ -22,7 +23,7 @@ type JobUpsert = Omit<
   | 'company'
   //
   | 'companyId'
-  | 'sourceId'
+  | 'sourceSlug'
   | 'source'
   | 'deletedAt'
   | 'tags'
@@ -72,8 +73,8 @@ async function upsertJobs(props: {
         }),
         prisma.job.upsert({
           where: {
-            sourceId_sourceKey: {
-              sourceId: props.source.id,
+            sourceSlug_sourceKey: {
+              sourceSlug: props.source.slug,
               sourceKey: item.job.sourceKey,
             },
           },
@@ -85,7 +86,7 @@ async function upsertJobs(props: {
     // delete old jobs
     prisma.job.updateMany({
       where: {
-        sourceId: props.source.id,
+        sourceSlug: props.source.slug,
         sourceKey: {
           notIn: tsItems.map((item) => item.job.sourceKey),
         },
@@ -155,34 +156,42 @@ async function pullRemoteOK(source: Source) {
   });
 }
 
-export const cronRouter = createRouter().query('pull', {
-  async resolve({ ctx }) {
-    const sources = await ctx.prisma.source.findMany();
-    const dict: Dict<(source: Source) => Promise<void>> = {
-      remoteok: pullRemoteOK,
-    };
+export const cronRouter = createRouter()
+  .query('reindex', {
+    async resolve() {
+      return await alogliaReindex();
+    },
+  })
+  .query('pull', {
+    async resolve({ ctx }) {
+      const sources = await ctx.prisma.source.findMany();
+      const dict: Dict<(source: Source) => Promise<void>> = {
+        remoteok: pullRemoteOK,
+      };
 
-    const results = await Promise.allSettled(
-      sources.map(async (source) => {
-        const fn = dict[source.slug];
-        if (!fn) {
-          throw new Error(`No such source "${source.slug}"`);
-        }
-        await fn(source);
-      }),
-    );
+      const results = await Promise.allSettled(
+        sources.map(async (source) => {
+          const fn = dict[source.slug];
+          if (!fn) {
+            throw new Error(`No such source "${source.slug}"`);
+          }
+          await fn(source);
+        }),
+      );
 
-    const fails = results.flatMap((result, index) =>
-      result.status === 'rejected'
-        ? [
-            {
-              reason: result.reason,
-              source: sources[index].slug,
-            },
-          ]
-        : [],
-    );
+      const fails = results.flatMap((result, index) =>
+        result.status === 'rejected'
+          ? [
+              {
+                reason: result.reason,
+                source: sources[index].slug,
+              },
+            ]
+          : [],
+      );
 
-    return { fails };
-  },
-});
+      const algolia = await alogliaReindex();
+
+      return { fails, algolia };
+    },
+  });

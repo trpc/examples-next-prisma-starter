@@ -12,6 +12,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model AppState {
+  id          Int       @id @default(1)
+  lastReindex DateTime?
+}
+
 model Company {
   id      String  @id @default(uuid())
   name    String  @unique
@@ -41,13 +46,13 @@ model Job {
   company   Company @relation(fields: [companyId], references: [id])
   companyId String
 
-  sourceId  String
-  sourceKey String
-  source    Source @relation(fields: [sourceId], references: [id])
+  sourceSlug String
+  sourceKey  String
+  source     Source @relation(fields: [sourceSlug], references: [slug])
 
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
-  @@unique([sourceId, sourceKey])
+  @@unique([sourceSlug, sourceKey])
 }

@@ -3,8 +3,10 @@
  */
 import superjson from 'superjson';
 import { createRouter } from '../trpc';
+import { algoliaRouter } from './public/algolia';
 import { cronRouter } from './cron';
-import { jobsRouter } from './jobs';
+import { jobsRouter } from './public/jobs';
+import { publicRouter } from './public';
 
 /**
  * Create your application's root router
@@ -24,6 +26,6 @@ export const appRouter = createRouter()
    */
   // .formatError(({ shape, error }) => { })
   .merge('cron.', cronRouter)
-  .merge('jobs.', jobsRouter);
+  .merge('public.', publicRouter);
 
 export type AppRouter = typeof appRouter;

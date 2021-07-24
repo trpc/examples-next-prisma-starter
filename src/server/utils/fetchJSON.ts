@@ -7,6 +7,7 @@ export async function fetchJSON(opts: { url: string }) {
   });
 
   if (!res.ok) {
+    console.log('text', await res.text());
     throw new Error('fetchJSON failed');
   }
 

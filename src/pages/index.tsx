@@ -1,9 +1,66 @@
+import { useDebouncedCallback } from 'hooks/useDebouncedCallback';
+import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { trpc } from '../utils/trpc';
+import Link from 'next/link';
+const useSearchQueryFromUrl = () => {
+  const router = useRouter();
+  const queryNow = typeof router.query.q === 'string' ? router.query.q : '';
+
+  return queryNow;
+};
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, '-') // Replace spaces with -
+    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+    .replace(/\-\-+/g, '-') // Replace multiple - with single -
+    .replace(/^-+/, '') // Trim - from start of text
+    .replace(/-+$/, ''); // Trim - from end of text
+}
+
+function SearchInput() {
+  const router = useRouter();
+  const queryNow = useSearchQueryFromUrl();
+  const [value, setValue] = useState(queryNow);
+
+  const onType = useDebouncedCallback((q: string) => {
+    router.push({
+      query: {
+        ...router.query,
+        q,
+      },
+    });
+  }, 300);
+  useEffect(() => {
+    onType(value);
+  }, [value, onType]);
+  useEffect(() => {
+    setValue(queryNow);
+  }, [queryNow]);
+
+  return (
+    <input
+      type="search"
+      name="query"
+      placeholder="Search..."
+      onChange={(e) => setValue(e.target.value)}
+      value={value}
+    />
+  );
+}
 
 export default function IndexPage() {
-  const jobsQuery = trpc.useQuery(['jobs.all']);
+  const query = useSearchQueryFromUrl();
+  const utils = trpc.useContext();
+  const jobsQuery = trpc.useQuery(['public.algolia.basic', { query }], {
+    keepPreviousData: true,
+  });
+
+  console.log('status', jobsQuery.isLoading);
+
   return (
     <>
       <Head>
@@ -11,25 +68,44 @@ export default function IndexPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Welcome to your tRPC starter!</h1>
-      <p>
-        Check <a href="https://trpc.io/docs">the docs</a> whenever you get
-        stuck, or ping <a href="https://twitter.com/alexdotjs">@alexdotjs</a> on
-        Twitter.
-      </p>
+      <form>
+        <SearchInput />
+        <noscript>
+          <input type="submit" />
+        </noscript>
+      </form>
       <h2>
         Posts
         {jobsQuery.status === 'loading' && '(loading)'}
       </h2>
-      {jobsQuery.data?.map((item) => (
-        <article key={item.id}>
-          <h3>{item.title}</h3>
-          {item.tags.length > 0 && `tags: ` + item.tags.join(', ')}
+      {jobsQuery.data?.hits.map((item) => {
+        const slug = `/job/${item.sourceSlug}-${item.sourceKey}-${slugify(
+          item.title,
+        )}`;
 
-          <details>
-            <pre>{JSON.stringify(item, null, 4)}</pre>
-          </details>
-        </article>
-      ))}
+        return (
+          <article key={item.id}>
+            <h3>{item.title}</h3>
+            {item.tags.length > 0 && `tags: ` + item.tags.join(', ')}
+
+            <details>
+              <pre>{JSON.stringify(item, null, 4)}</pre>
+            </details>
+            <Link href={slug}>
+              <a
+                onFocus={() =>
+                  utils.prefetchQuery(['public.jobs.bySlug', slug])
+                }
+                onMouseEnter={() => {
+                  utils.prefetchQuery(['public.jobs.bySlug', slug]);
+                }}
+              >
+                View job
+              </a>
+            </Link>
+          </article>
+        );
+      })}
 
       {process.env.NODE_ENV !== 'production' && (
         <ReactQueryDevtools initialIsOpen={false} />
