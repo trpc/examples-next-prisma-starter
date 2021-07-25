@@ -33,6 +33,12 @@ model Source {
   Job  Job[]
 }
 
+enum JobType {
+  UNKNOWN
+  FULL_TIME
+  CONTRACT
+}
+
 model Job {
   id          String   @id @default(uuid())
   title       String
@@ -42,13 +48,16 @@ model Job {
   remote      Boolean
   publishDate DateTime
   tags        String[]
+  jobType     JobType  @default(UNKNOWN)
+  category    String?
 
   company   Company @relation(fields: [companyId], references: [id])
   companyId String
 
   sourceSlug String
   sourceKey  String
-  source     Source @relation(fields: [sourceSlug], references: [slug])
+  sourceJSON String?
+  source     Source  @relation(fields: [sourceSlug], references: [slug])
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

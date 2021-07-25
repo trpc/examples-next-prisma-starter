@@ -4,17 +4,10 @@
  */
 
 import { fetchJSON } from 'server/utils/fetchJSON';
+import { zodJSONDate } from 'server/utils/zod';
 import { z } from 'zod';
 import { SourceFn } from '.';
 import { CompanyUpsert, JobUpsert } from '../bulkUpsert';
-
-const jsonDate = z
-  .string()
-  .transform((str) => {
-    const date = new Date(str);
-    return date;
-  })
-  .refine((v) => v.getTime() > 0);
 
 export const remoteok: SourceFn = async () => {
   const json = await fetchJSON({
@@ -33,7 +26,7 @@ export const remoteok: SourceFn = async () => {
     position: z.string(),
     url: z.string().url(),
     apply_url: z.string().url(),
-    date: jsonDate,
+    date: zodJSONDate,
   });
 
   const entries = z.array(z.unknown()).parse(json);

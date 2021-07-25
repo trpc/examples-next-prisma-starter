@@ -1,8 +1,8 @@
 export async function fetchJSON(opts: { url: string }) {
   const res = await fetch(opts.url, {
-    headers: {
-      'content-type': 'application/json',
-    },
+    // headers: {
+    //   'content-type': 'application/json',
+    // },
     method: 'GET',
   });
 

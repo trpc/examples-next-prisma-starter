@@ -6,6 +6,10 @@ const sources: Omit<Source, 'id'>[] = [
     slug: 'remoteok',
     url: 'https://remoteok.io',
   },
+  {
+    slug: 'remotive',
+    url: 'https://remotive.io',
+  },
 ];
 async function main() {
   const promises = sources.map((source) =>
