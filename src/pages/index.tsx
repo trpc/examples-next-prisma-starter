@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Markdown from 'react-markdown';
-import { ReactQueryDevtools } from 'react-query/devtools';
 import { inferQueryInput, trpc } from '../utils/trpc';
 
 function useFilters() {
@@ -61,7 +60,7 @@ export default function IndexPage() {
   const sources = trpc.useQuery(['public.sources']);
 
   return (
-    <div style={{ padding: '40px' }}>
+    <>
       <Head>
         <title>TypeScript.careers</title>
         <link rel="icon" href="/favicon.ico" />
@@ -121,10 +120,6 @@ export default function IndexPage() {
                 ))}
               </p>
             )}
-            <p></p>
-            <details>
-              <pre>{JSON.stringify(item, null, 4)}</pre>
-            </details>
             <Link href={`/job/${item.$slug}`}>
               <a
                 {...onFocusAndPress(() => {
@@ -177,11 +172,7 @@ export default function IndexPage() {
           </Link>
         ) : null}
       </div>
-
-      {process.env.NODE_ENV !== 'production' && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
-    </div>
+    </>
   );
 }
 
