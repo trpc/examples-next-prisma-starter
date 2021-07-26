@@ -11,9 +11,9 @@ import { CompanyUpsert, JobUpsert } from '../bulkUpsert';
 
 export const remoteok: SourceFn = async () => {
   const json = await fetchJSON({
-    url: 'https://remoteok.io/remote-jobs.json',
+    // url: 'https://remoteok.io/remote-jobs.json',
     // FIXME: why does the below url not work when it does in the browser?
-    // url: 'https://remoteok.io/remote-typescript-jobs.json',
+    url: 'https://remoteok.io/remote-typescript-jobs.json',
   });
   const remoteOkSchema = z.object({
     slug: z.string().optional(),

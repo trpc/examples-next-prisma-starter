@@ -9,9 +9,10 @@ export async function fetchJSON(opts: { url: string }) {
   }, 3_000);
 
   const res = await fetch(opts.url, {
-    // headers: {
-    //   'content-type': 'application/json',
-    // },
+    headers: {
+      'user-agent': 'typescript.careers',
+      'x-greetings-from': 'alex@kattcorp.com / https://typescript.careers',
+    },
     method: 'GET',
     signal: controller.signal,
   });

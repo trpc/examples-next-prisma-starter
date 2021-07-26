@@ -13,8 +13,6 @@ import { CompanyUpsert, JobUpsert } from '../bulkUpsert';
 export const remotive: SourceFn = async () => {
   const json = await fetchJSON({
     url: 'https://remotive.io/api/remote-jobs?search=typescript',
-    // FIXME: why does the below url not work when it does in the browser?
-    // url: 'https://remoteok.io/remote-typescript-jobs.json',
   });
   const schema = z.object({
     id: z.string().or(z.number()),
