@@ -34,8 +34,8 @@ export async function bulkUpsertJobs(props: BulkUpsertJobProps) {
     );
   });
   // const tsItems = props.items;
-  await prisma.$transaction([
-    ...tsItems.flatMap((item) => {
+  await Promise.allSettled(
+    tsItems.flatMap((item) => {
       const jobWithSourceId: Prisma.JobUpsertArgs['create'] = {
         ...item.job,
         company: {
@@ -70,18 +70,18 @@ export async function bulkUpsertJobs(props: BulkUpsertJobProps) {
         }),
       ];
     }),
-    // delete old jobs
-    prisma.job.updateMany({
-      where: {
-        sourceSlug: props.source.slug,
-        sourceKey: {
-          notIn: tsItems.map((item) => item.job.sourceKey),
-        },
-        deletedAt: null,
+  );
+  // delete old jobs
+  await prisma.job.updateMany({
+    where: {
+      sourceSlug: props.source.slug,
+      sourceKey: {
+        notIn: tsItems.map((item) => item.job.sourceKey),
       },
-      data: {
-        deletedAt: new Date(),
-      },
-    }),
-  ]);
+      deletedAt: null,
+    },
+    data: {
+      deletedAt: new Date(),
+    },
+  });
 }
