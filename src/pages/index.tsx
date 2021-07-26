@@ -22,7 +22,7 @@ function SearchInput() {
 export default function IndexPage() {
   const [query] = useStringParam('q');
   const utils = trpc.useContext();
-  const jobsQuery = trpc.useQuery(['public.algolia.basic', { query }], {
+  const jobsQuery = trpc.useQuery(['algolia.public.search', { query }], {
     keepPreviousData: true,
   });
 
@@ -68,13 +68,13 @@ export default function IndexPage() {
             <details>
               <pre>{JSON.stringify(item, null, 4)}</pre>
             </details>
-            <Link href={`/jobs/${item.$slug}`}>
+            <Link href={`/job/${item.$slug}`}>
               <a
                 onFocus={() =>
-                  utils.prefetchQuery(['public.jobs.bySlug', item.$slug])
+                  utils.prefetchQuery(['job.public.bySlug', item.$slug])
                 }
                 onMouseEnter={() => {
-                  utils.prefetchQuery(['public.jobs.bySlug', item.$slug]);
+                  utils.prefetchQuery(['job.public.bySlug', item.$slug]);
                 }}
               >
                 View job

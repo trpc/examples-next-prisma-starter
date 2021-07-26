@@ -4,22 +4,13 @@
  */
 import { algoliaIndex, AlgoliaJob } from 'server/utils/algolia';
 import { z } from 'zod';
-import { createRouter } from '../../trpc';
+import { createRouter } from '../trpc';
 import _ from 'lodash';
-
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
-    .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, ''); // Trim - from end of text
-}
+import { slugify } from 'server/utils/slugify';
 
 export const algoliaRouter = createRouter()
   //
-  .query('basic', {
+  .query('public.search', {
     input: z
       .object({
         query: z.string().nullish(),
@@ -69,7 +60,7 @@ export const algoliaRouter = createRouter()
 
           return {
             ...essentials,
-            // algolia actually gives us a json date
+            // algolia gives us a json date string
             publishDate: new Date(job.publishDate),
             // $ indicates virtual field
             $slug: `${job.sourceSlug}-${job.sourceKey}-${slugify(job.title)}`,

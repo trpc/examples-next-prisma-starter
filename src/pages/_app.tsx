@@ -39,7 +39,7 @@ export default withTRPC<AppRouter>({
     if (ctx?.req?.url && !process.browser) {
       const parts = new URL(`http://localhost` + ctx.req.url);
 
-      if (parts.pathname === '/' || parts.pathname.startsWith('/jobs')) {
+      if (parts.pathname === '/' || parts.pathname.startsWith('/job/')) {
         console.log('🏎 Caching:', parts.pathname);
         // cache full page for 1 day + revalidate once every second
         const ONE_DAY_IN_SECONDS = 60 * 60 * 24;

@@ -3,11 +3,9 @@
  */
 import superjson from 'superjson';
 import { createRouter } from '../trpc';
-import { algoliaRouter } from './public/algolia';
+import { algoliaRouter } from './algolia';
 import { cronRouter } from './cron';
-import { jobsRouter } from './public/jobs';
-import { publicRouter } from './public';
-
+import { jobRouter } from './job';
 /**
  * Create your application's root router
  * If you want to use SSG, you need export this
@@ -26,6 +24,7 @@ export const appRouter = createRouter()
    */
   // .formatError(({ shape, error }) => { })
   .merge('cron.', cronRouter)
-  .merge('public.', publicRouter);
+  .merge('algolia.', algoliaRouter)
+  .merge('job.', jobRouter);
 
 export type AppRouter = typeof appRouter;
