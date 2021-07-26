@@ -31,12 +31,12 @@ export const jobRouter = createRouter()
         throw new TRPCError({ code: 'PATH_NOT_FOUND' });
       }
       const isHtmlTest = /<\/?[a-z][\s\S]*>/i;
-      const $mrkdwn = isHtmlTest.test(job.text)
-        ? turndownService.turndown(job.text)
-        : job.text;
+      const $wasHtml = isHtmlTest.test(job.text);
+      const $mrkdwn = $wasHtml ? turndownService.turndown(job.text) : job.text;
       return {
         ...job,
         $mrkdwn,
+        $wasHtml,
       };
     },
   });
