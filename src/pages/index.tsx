@@ -109,7 +109,7 @@ export default function IndexPage() {
         </ul>
       </blockquote>
       <h2>Search for anything</h2>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <SearchInput />
         <noscript>
           <input type="submit" />
