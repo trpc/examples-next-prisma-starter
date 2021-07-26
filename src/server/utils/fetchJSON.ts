@@ -11,7 +11,7 @@ export async function fetchJSON(opts: { url: string }) {
   const res = await fetch(opts.url, {
     headers: {
       'user-agent': 'typescript.careers',
-      'x-greetings-from': 'alex@kattcorp.com / https://typescript.careers',
+      // 'x-greetings-from': 'alex@kattcorp.com / https://typescript.careers',
     },
     method: 'GET',
     signal: controller.signal,
