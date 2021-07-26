@@ -28,17 +28,20 @@ function SearchInput() {
   }, [params.values.q]);
 
   return (
-    <input
-      type="search"
-      name="q"
-      placeholder="Search..."
-      onChange={(e) => {
-        const newValue = e.target.value;
-        setValue(newValue);
-        debouncedChange(newValue);
-      }}
-      value={value}
-    />
+    <label>
+      Search:{' '}
+      <input
+        type="search"
+        name="q"
+        placeholder="e.g. 'Senior'"
+        onChange={(e) => {
+          const newValue = e.target.value;
+          setValue(newValue);
+          debouncedChange(newValue);
+        }}
+        value={value}
+      />
+    </label>
   );
 }
 
@@ -108,13 +111,15 @@ export default function IndexPage() {
           </li>
         </ul>
       </blockquote>
-      <h2>Search for anything</h2>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <SearchInput />
-        <noscript>
-          <input type="submit" />
-        </noscript>
-      </form>
+      <fieldset title="Search for anything">
+        <legend>Search for something here</legend>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <SearchInput />
+          <noscript>
+            <input type="submit" />
+          </noscript>
+        </form>
+      </fieldset>
       <h2>
         Jobs
         {jobsQuery.status === 'loading' && '(loading)'}
