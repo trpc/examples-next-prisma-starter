@@ -1,11 +1,9 @@
-import { useDebouncedCallback } from 'hooks/useDebouncedCallback';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import Markdown from 'react-markdown';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { trpc } from '../utils/trpc';
 import { useStringParam } from '../hooks/useStringParam';
+import { trpc } from '../utils/trpc';
 
 function SearchInput() {
   const [value, setValue] = useStringParam('q', { debounceMs: 300 });
