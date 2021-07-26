@@ -21,6 +21,7 @@ async function getAlgoliaEntries(since: Date | null) {
     ...job,
     createdAtTimestamp: job.createdAt.getTime() / 1000,
     updatedAtTimestamp: job.createdAt.getTime() / 1000,
+    deletedAtTimestamp: job.deletedAt ? job.deletedAt.getTime() / 100 : null,
   }));
 }
 
@@ -28,9 +29,10 @@ export type AlgoliaJob = inferAsyncReturnType<typeof getAlgoliaEntries>[number];
 
 async function updateSettings() {
   await algoliaIndex.setSettings({
-    searchableAttributes: ['deletedAt', 'text', 'title'],
+    searchableAttributes: ['title', 'tags', 'sourceSlug', 'text'],
     ranking: [
       'proximity',
+      'desc(publishDate)',
       'desc(updatedAtTimestamp)',
       'desc(createdAtTimestamp)',
     ],

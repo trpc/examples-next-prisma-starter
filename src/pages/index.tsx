@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { trpc } from '../utils/trpc';
 import Link from 'next/link';
+import Markdown from 'react-markdown';
 const useSearchQueryFromUrl = () => {
   const router = useRouter();
   const queryNow = typeof router.query.q === 'string' ? router.query.q : '';
@@ -79,25 +80,37 @@ export default function IndexPage() {
         {jobsQuery.status === 'loading' && '(loading)'}
       </h2>
       {jobsQuery.data?.hits.map((item) => {
-        const slug = `/job/${item.sourceSlug}-${item.sourceKey}-${slugify(
-          item.title,
-        )}`;
-
         return (
           <article key={item.id}>
-            <h3>{item.title}</h3>
-            {item.tags.length > 0 && `tags: ` + item.tags.join(', ')}
-
+            <h3>
+              <Markdown allowedElements={['em']} unwrapDisallowed>
+                {item.title}
+              </Markdown>
+            </h3>
+            {item.tags.length > 0 && (
+              <p>
+                tags:{' '}
+                {item.tags.map((tag, index) => (
+                  <span key={tag}>
+                    <Markdown allowedElements={['em']} unwrapDisallowed>
+                      {tag}
+                    </Markdown>
+                    {index < item.tags.length - 1 ? ', ' : ''}
+                  </span>
+                ))}
+              </p>
+            )}
+            <p></p>
             <details>
               <pre>{JSON.stringify(item, null, 4)}</pre>
             </details>
-            <Link href={slug}>
+            <Link href={`/jobs/${item.$slug}`}>
               <a
                 onFocus={() =>
-                  utils.prefetchQuery(['public.jobs.bySlug', slug])
+                  utils.prefetchQuery(['public.jobs.bySlug', item.$slug])
                 }
                 onMouseEnter={() => {
-                  utils.prefetchQuery(['public.jobs.bySlug', slug]);
+                  utils.prefetchQuery(['public.jobs.bySlug', item.$slug]);
                 }}
               >
                 View job
