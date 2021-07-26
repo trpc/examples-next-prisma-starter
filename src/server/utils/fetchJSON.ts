@@ -3,7 +3,7 @@ export async function fetchJSON(opts: { url: string }) {
 
   const timeout = setTimeout(() => {
     controller.abort();
-  }, 150);
+  }, 3_000);
 
   const res = await fetch(opts.url, {
     // headers: {
