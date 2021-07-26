@@ -6,5 +6,15 @@ export default function JobPage() {
 
   const query = trpc.useQuery(['job.public.bySlug', slug]);
 
-  return <>{query.data && <pre>{JSON.stringify(query.data, null, 4)}</pre>}</>;
+  const job = query.data;
+  return (
+    <>
+      {job && (
+        <>
+          <h1>{job.title}</h1>
+          <pre>{JSON.stringify(job, null, 4)}</pre>
+        </>
+      )}
+    </>
+  );
 }

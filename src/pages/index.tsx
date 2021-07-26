@@ -58,6 +58,7 @@ export default function IndexPage() {
     keepPreviousData: true,
   });
   const utils = trpc.useContext();
+  const sources = trpc.useQuery(['public.sources']);
 
   return (
     <div style={{ padding: '40px' }}>
@@ -65,7 +66,30 @@ export default function IndexPage() {
         <title>TypeScript.careers</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>Welcome to your tRPC starter!</h1>
+      <h1>TypeScript.careers</h1>
+      <p>
+        A niche job posting site - only for TypeScript jobs - currently sourcing
+        from:{' '}
+        {sources.data
+          ?.map((source) => source.slug)
+          .sort()
+          .join(', ')}
+        .
+      </p>
+      <blockquote>
+        <p style={{ fontStyle: 'italic' }}>This site is a work in progress</p>
+        <h4>A few cool features:</h4>
+        <ul>
+          <li>Zero loading times between pages / pagination</li>
+          <li>Try disabling JavaScript. Page still works; even the filters.</li>
+          <li>Search through Algolia</li>
+          <li>
+            Project is open-source on{' '}
+            <a href="https://github.com/trpc/trpc">GitHub</a>.
+          </li>
+        </ul>
+      </blockquote>
+      <h2>Search for anything</h2>
       <form>
         <SearchInput />
         <noscript>
@@ -73,7 +97,7 @@ export default function IndexPage() {
         </noscript>
       </form>
       <h2>
-        Posts
+        Jobs
         {jobsQuery.status === 'loading' && '(loading)'}
       </h2>
       {jobsQuery.data?.hits.map((item) => {
@@ -114,6 +138,7 @@ export default function IndexPage() {
         );
       })}
 
+      <hr />
       <div>
         {values.page > 0 ? (
           <Link

@@ -23,6 +23,11 @@ export const appRouter = createRouter()
    * @link https://trpc.io/docs/error-formatting
    */
   // .formatError(({ shape, error }) => { })
+  .query('public.sources', {
+    resolve({ ctx }) {
+      return ctx.prisma.source.findMany();
+    },
+  })
   .merge('cron.', cronRouter)
   .merge('algolia.', algoliaRouter)
   .merge('job.', jobRouter);

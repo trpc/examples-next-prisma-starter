@@ -14,6 +14,9 @@ async function getAlgoliaEntries(since: Date | null) {
           updatedAt: { gte: since },
         }
       : {},
+    include: {
+      company: true,
+    },
   });
 
   return items.map((job) => ({
@@ -29,7 +32,13 @@ export type AlgoliaJob = inferAsyncReturnType<typeof getAlgoliaEntries>[number];
 
 async function updateSettings() {
   await algoliaIndex.setSettings({
-    searchableAttributes: ['title', 'tags', 'sourceSlug', 'text'],
+    searchableAttributes: [
+      'title',
+      'tags',
+      'sourceSlug',
+      'text',
+      'company.name',
+    ],
     ranking: [
       'proximity',
       'desc(publishDate)',

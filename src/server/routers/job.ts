@@ -18,6 +18,10 @@ export const jobRouter = createRouter()
             sourceSlug,
           },
         },
+        include: {
+          company: true,
+          source: true,
+        },
       });
     },
   });
