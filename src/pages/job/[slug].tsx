@@ -20,7 +20,9 @@ export default function JobPage() {
 
           <hr />
           <h2>Raw data</h2>
-          <pre>{JSON.stringify(job, null, 4)}</pre>
+          <details>
+            <pre>{JSON.stringify(job, null, 4)}</pre>
+          </details>
         </>
       )}
     </>
