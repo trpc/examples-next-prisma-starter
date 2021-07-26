@@ -30,6 +30,10 @@
     "test-start": "start-server-and-test start 3000 test",
     "test": "jest"
   },
+  "cacheDirectories": [
+    "node_modules/",
+    ".next/cache/"
+  ],
   "prettier": {
     "printWidth": 80,
     "trailingComma": "all",
