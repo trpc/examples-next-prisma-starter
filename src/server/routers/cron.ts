@@ -35,7 +35,7 @@ export const cronRouter = createRouter()
           errors.push({ error, source: source.slug });
         }
       }
-
+      console.log('reindexing');
       const algolia = await alogliaReindex();
 
       return { errors, algolia };

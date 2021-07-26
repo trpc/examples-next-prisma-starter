@@ -1,10 +1,18 @@
 export async function fetchJSON(opts: { url: string }) {
+  const controller = new AbortController();
+
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, 150);
+
   const res = await fetch(opts.url, {
     // headers: {
     //   'content-type': 'application/json',
     // },
     method: 'GET',
+    signal: controller.signal,
   });
+  clearTimeout(timeout);
 
   if (!res.ok) {
     console.log('text', await res.text());
