@@ -1,7 +1,4 @@
-# Prisma + tRPC
-
-Try in CodeSandbox: [https://githubbox.com/trpc/trpc/tree/main/examples/next-prisma-starter](https://codesandbox.io/s/github/trpc/trpc/tree/main/examples/next-prisma-starter?file=/src/pages/index.tsx)
-
+# [TypeScript.careers](https://typescript.careers)
 
 ## Features
 
@@ -10,6 +7,7 @@ Try in CodeSandbox: [https://githubbox.com/trpc/trpc/tree/main/examples/next-pri
 - ⚡ Database with Prisma
 - ⚙️ VSCode extensions
 - 🎨 ESLint + Prettier
+- 🔎 Search with Algolia
 - 💚 CI setup using GitHub Actions:
   - ✅ E2E testing with [Playwright](https://playwright.dev/)
   - ✅ Linting
