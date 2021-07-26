@@ -28,15 +28,20 @@ export const cronRouter = createRouter()
           throw new Error(`No such source "${source.slug}"`);
         }
         try {
+          console.time(`${source.slug} crawling`);
           const items = await fn(source);
+          console.timeEnd(`${source.slug} crawling`);
+
+          console.time(`${source.slug} upsert ${items.length} items`);
           await bulkUpsertJobs({ source, items });
-          console.log('✅', source.slug);
+          console.timeEnd(`${source.slug} upsert ${items.length} items`);
         } catch (error) {
           errors.push({ error, source: source.slug });
         }
       }
-      console.log('reindexing');
+      console.time('reindexing');
       const algolia = await alogliaReindex();
+      console.timeEnd('reindexing');
 
       return { errors, algolia };
     },
