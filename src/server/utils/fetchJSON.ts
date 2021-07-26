@@ -1,3 +1,5 @@
+import AbortController from 'abort-controller';
+
 export async function fetchJSON(opts: { url: string }) {
   const controller = new AbortController();
 
