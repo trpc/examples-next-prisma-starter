@@ -36,6 +36,19 @@ export default withTRPC<AppRouter>({
   config({ ctx }) {
     // for app caching with SSR see https://trpc.io/docs/caching
 
+    if (ctx?.req?.url && !process.browser) {
+      const parts = new URL(`http://localhost` + ctx.req.url);
+
+      if (parts.pathname === '/' || parts.pathname.startsWith('/jobs')) {
+        console.log('🏎 Caching:', parts.pathname);
+        // cache full page for 1 day + revalidate once every second
+        const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+        ctx.res?.setHeader(
+          'Cache-Control',
+          `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+        );
+      }
+    }
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr

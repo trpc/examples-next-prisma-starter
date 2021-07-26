@@ -55,7 +55,7 @@ export default function IndexPage() {
               <p>
                 tags:{' '}
                 {item.tags.map((tag, index) => (
-                  <span key={tag}>
+                  <span key={index}>
                     <Markdown allowedElements={['em']} unwrapDisallowed>
                       {tag}
                     </Markdown>
