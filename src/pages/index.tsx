@@ -1,46 +1,14 @@
 import { useDebouncedCallback } from 'hooks/useDebouncedCallback';
-import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Markdown from 'react-markdown';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { trpc } from '../utils/trpc';
-import Link from 'next/link';
-import Markdown from 'react-markdown';
-const useSearchQueryFromUrl = () => {
-  const router = useRouter();
-  const queryNow = typeof router.query.q === 'string' ? router.query.q : '';
-
-  return queryNow;
-};
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with -
-    .replace(/[^\w\-]+/g, '') // Remove all non-word chars
-    .replace(/\-\-+/g, '-') // Replace multiple - with single -
-    .replace(/^-+/, '') // Trim - from start of text
-    .replace(/-+$/, ''); // Trim - from end of text
-}
+import { useStringParam } from '../hooks/useStringParam';
 
 function SearchInput() {
-  const router = useRouter();
-  const queryNow = useSearchQueryFromUrl();
-  const [value, setValue] = useState(queryNow);
-
-  const onType = useDebouncedCallback((q: string) => {
-    router.push({
-      query: {
-        ...router.query,
-        q,
-      },
-    });
-  }, 300);
-  useEffect(() => {
-    onType(value);
-  }, [value, onType]);
-  useEffect(() => {
-    setValue(queryNow);
-  }, [queryNow]);
+  const [value, setValue] = useStringParam('q', { debounceMs: 300 });
 
   return (
     <input
@@ -54,7 +22,7 @@ function SearchInput() {
 }
 
 export default function IndexPage() {
-  const query = useSearchQueryFromUrl();
+  const [query] = useStringParam('q');
   const utils = trpc.useContext();
   const jobsQuery = trpc.useQuery(['public.algolia.basic', { query }], {
     keepPreviousData: true,
