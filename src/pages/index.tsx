@@ -26,8 +26,6 @@ export default function IndexPage() {
     keepPreviousData: true,
   });
 
-  console.log('status', jobsQuery.isLoading);
-
   return (
     <>
       <Head>
