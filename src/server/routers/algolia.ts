@@ -14,13 +14,15 @@ export const algoliaRouter = createRouter()
     input: z
       .object({
         query: z.string().nullish(),
+        cursor: z.number().nullish(),
       })
       .nullish(),
     async resolve({ input }) {
       const args = input ?? {};
       const query = args.query ?? '';
+      const page = args.cursor ?? 0;
 
-      const res = await algoliaIndex.search<AlgoliaJob>(query);
+      const res = await algoliaIndex.search<AlgoliaJob>(query, { page });
 
       const fieldsForHighlights = ['title', 'tags'] as const;
       const relevantFields = [
@@ -31,7 +33,7 @@ export const algoliaRouter = createRouter()
       ] as const;
 
       return {
-        ..._.pick(res, ['nbHits', 'pages', 'page']),
+        ..._.pick(res, ['nbHits', 'pages', 'page', 'nbPages']),
         hits: res.hits.map((job) => {
           const essentials = _.pick(job, relevantFields);
 
