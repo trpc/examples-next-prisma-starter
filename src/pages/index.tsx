@@ -2,7 +2,7 @@ import { useDebouncedCallback } from 'hooks/useDebouncedCallback';
 import { useParams } from 'hooks/useParams';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { inferQueryInput, trpc } from '../utils/trpc';
 
@@ -14,13 +14,6 @@ function useFilters() {
       default: 0,
     },
   });
-}
-
-function onFocusAndPress(fn: () => void) {
-  return {
-    onMouseEnter: fn,
-    onFocus: fn,
-  };
 }
 
 function SearchInput() {
@@ -51,13 +44,40 @@ function SearchInput() {
 
 export default function IndexPage() {
   const { values, getParams } = useFilters();
-  type Input = inferQueryInput<'algolia.public.search'>;
-  const input: Input = { query: values.q, cursor: values.page };
+  const input = useMemo(
+    () => ({ query: values.q, cursor: values.page }),
+    [values.page, values.q],
+  );
   const jobsQuery = trpc.useQuery(['algolia.public.search', input], {
     keepPreviousData: true,
   });
   const utils = trpc.useContext();
   const sources = trpc.useQuery(['public.sources']);
+
+  const hasPrevPage = values.page > 0;
+  const hasNextPage = !!(
+    jobsQuery.data?.nbPages && jobsQuery.data.nbPages > values.page
+  );
+  // prefetch next/prev page
+  useEffect(() => {
+    hasPrevPage &&
+      utils.prefetchQuery([
+        'algolia.public.search',
+        { ...input, cursor: input.cursor - 1 },
+      ]);
+    hasNextPage &&
+      utils.prefetchQuery([
+        'algolia.public.search',
+        { ...input, cursor: input.cursor + 1 },
+      ]);
+  }, [hasNextPage, hasPrevPage, input, utils]);
+
+  // prefetch all items
+  useEffect(() => {
+    jobsQuery.data?.hits.forEach((hit) =>
+      utils.prefetchQuery(['job.public.bySlug', hit.$slug]),
+    );
+  }, [jobsQuery.data?.hits, utils]);
 
   return (
     <>
@@ -121,13 +141,7 @@ export default function IndexPage() {
               </p>
             )}
             <Link href={`/job/${item.$slug}`}>
-              <a
-                {...onFocusAndPress(() => {
-                  utils.prefetchQuery(['job.public.bySlug', item.$slug]);
-                })}
-              >
-                View job
-              </a>
+              <a>View job</a>
             </Link>
           </article>
         );
@@ -135,40 +149,22 @@ export default function IndexPage() {
 
       <hr />
       <div>
-        {values.page > 0 ? (
+        {hasPrevPage ? (
           <Link
             href={{
               query: getParams({ page: values.page - 1 }),
             }}
           >
-            <a
-              {...onFocusAndPress(() => {
-                utils.prefetchQuery([
-                  'algolia.public.search',
-                  { ...input, cursor: values.page - 1 },
-                ]);
-              })}
-            >
-              Previous page
-            </a>
+            <a>Previous page</a>
           </Link>
         ) : null}{' '}
-        {jobsQuery.data?.nbPages && jobsQuery.data.nbPages > values.page ? (
+        {hasNextPage ? (
           <Link
             href={{
               query: getParams({ page: values.page + 1 }),
             }}
           >
-            <a
-              {...onFocusAndPress(() => {
-                utils.prefetchQuery([
-                  'algolia.public.search',
-                  { ...input, cursor: values.page + 1 },
-                ]);
-              })}
-            >
-              Next page
-            </a>
+            <a>Next page</a>
           </Link>
         ) : null}
       </div>
