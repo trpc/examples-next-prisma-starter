@@ -157,7 +157,7 @@ export default function IndexPage() {
               Previous page
             </a>
           </Link>
-        ) : null}
+        ) : null}{' '}
         {jobsQuery.data?.nbPages && jobsQuery.data.nbPages > values.page ? (
           <Link
             href={{
