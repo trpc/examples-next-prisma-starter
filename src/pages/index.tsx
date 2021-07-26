@@ -104,7 +104,7 @@ export default function IndexPage() {
           <li>Search through Algolia</li>
           <li>
             Project is open-source on{' '}
-            <a href="https://github.com/trpc/trpc">GitHub</a>.
+            <a href="https://github.com/KATT/typescript.careers">GitHub</a>.
           </li>
         </ul>
       </blockquote>
