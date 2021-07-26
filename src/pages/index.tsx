@@ -3,7 +3,7 @@ import { useParams } from 'hooks/useParams';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Markdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 import { inferQueryInput, trpc } from '../utils/trpc';
 
 function useFilters() {
@@ -103,18 +103,18 @@ export default function IndexPage() {
         return (
           <article key={item.id}>
             <h3>
-              <Markdown allowedElements={['em']} unwrapDisallowed>
+              <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
                 {item.title}
-              </Markdown>
+              </ReactMarkdown>
             </h3>
             {item.tags.length > 0 && (
               <p>
                 tags:{' '}
                 {item.tags.map((tag, index) => (
                   <span key={index}>
-                    <Markdown allowedElements={['em']} unwrapDisallowed>
+                    <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
                       {tag}
-                    </Markdown>
+                    </ReactMarkdown>
                     {index < item.tags.length - 1 ? ', ' : ''}
                   </span>
                 ))}
