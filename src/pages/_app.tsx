@@ -18,9 +18,9 @@ function getBaseUrl() {
     return '';
   }
   // // reference for vercel.com
-  // if (process.env.VERCEL_URL) {
-  //   return `https://${process.env.VERCEL_URL}`;
-  // }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
 
   // // reference for render.com
   // if (process.env.RENDER_INTERNAL_HOSTNAME) {
