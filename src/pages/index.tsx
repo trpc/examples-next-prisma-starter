@@ -125,7 +125,7 @@ function JobListItem(props: {
                     aria-hidden="true"
                   />
                   <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
-                    {item.location}
+                    {item.location ?? 'Unknown'}
                   </ReactMarkdown>
                 </p>
                 <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
