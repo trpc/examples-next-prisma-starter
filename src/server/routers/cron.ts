@@ -11,12 +11,12 @@ import { z } from 'zod';
 
 export const cronRouter = createRouter()
   // TODO make private / auth
-  .query('reindex', {
+  .mutation('reindex', {
     async resolve() {
       return await alogliaReindex();
     },
   })
-  .query('pull', {
+  .mutation('pull', {
     input: z.string(),
     async resolve({ ctx, input }) {
       const source = await ctx.prisma.source.findUnique({
