@@ -41,7 +41,7 @@ function SearchForm() {
         type="search"
         id="search"
         autoFocus
-        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-lg"
+        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-600 focus:border-primary-500 sm:text-lg"
         name="q"
         placeholder="Search for anything..."
         onChange={(e) => {
@@ -63,7 +63,7 @@ function HeroSection() {
     <div className="py-10 text-center">
       <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
         <span className="block xl:inline">Find your next</span>{' '}
-        <span className="block text-indigo-600 xl:inline">TypeScript</span>{' '}
+        <span className="block text-primary-500 xl:inline">TypeScript</span>{' '}
         opportunity
       </h1>
       <p className="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
@@ -92,7 +92,7 @@ function JobListItem(props: {
         <a className="block hover:bg-gray-50">
           <div className="px-4 py-4 sm:px-6">
             <div className="flex items-center justify-between">
-              <h3 className="flex-shrink-0 text-sm font-medium text-indigo-600">
+              <h3 className="flex-shrink-0 text-sm font-medium text-primary-600">
                 <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
                   {item.title}
                 </ReactMarkdown>
@@ -103,7 +103,7 @@ function JobListItem(props: {
                     {item.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="inline-flex px-2 mb-1 ml-1 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full"
+                        className="inline-flex px-2 mb-1 ml-1 text-xs font-semibold leading-5 text-gray-800 rounded-full bg-primary-100"
                       >
                         <ReactMarkdown
                           allowedElements={['em']}
@@ -124,7 +124,9 @@ function JobListItem(props: {
                     className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />
-                  {item.location}
+                  <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
+                    {item.location}
+                  </ReactMarkdown>
                 </p>
                 <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
                   <OfficeBuildingIcon
@@ -204,7 +206,7 @@ export default function IndexPage() {
         <title>TypeScript.careers</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="p-2 pb-10 bg-gray-100">
+      <div className="p-2 pb-10 bg-primary-100">
         <HeroSection />
         <div className="max-w-5xl mx-auto overflow-hidden bg-white shadow sm:rounded-md">
           <ul className="divide-y divide-gray-200">
