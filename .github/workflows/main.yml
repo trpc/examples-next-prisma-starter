@@ -2,6 +2,8 @@ name: E2E-testing
 on: [push]
 jobs:
   e2e:
+    env:
+      NODE_ENV: test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

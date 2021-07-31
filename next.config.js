@@ -1,4 +1,9 @@
-/**
- * @link https://nextjs.org/docs/api-reference/next.config.js/introduction
- */
-module.exports = {};
+/* eslint-disable @typescript-eslint/no-var-requires */
+require('ts-node').register({
+  compilerOptions: {
+    target: 'es5',
+    module: 'commonjs',
+  },
+});
+
+module.exports = require('./next.config.ts');
