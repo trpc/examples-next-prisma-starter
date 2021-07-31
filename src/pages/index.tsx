@@ -97,7 +97,7 @@ function JobListItem(props: {
                   {item.title}
                 </ReactMarkdown>
               </h3>
-              <div className="flex flex-wrap justify-end ml-2 text-right">
+              <div className="flex-wrap justify-end hidden ml-2 text-right md:flex">
                 {item.tags.length > 0 && (
                   <>
                     {item.tags.map((tag, index) => (
@@ -204,7 +204,7 @@ export default function IndexPage() {
         <title>TypeScript.careers</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="pb-10 bg-gray-100">
+      <div className="p-2 pb-10 bg-gray-100">
         <HeroSection />
         <div className="max-w-5xl mx-auto overflow-hidden bg-white shadow sm:rounded-md">
           <ul className="divide-y divide-gray-200">
