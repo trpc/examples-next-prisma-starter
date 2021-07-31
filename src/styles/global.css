@@ -7,12 +7,6 @@ html {
   scroll-behavior: smooth;
 }
 
-em {
+.JobListItem em {
   background-color: yellow;
-}
-
-blockquote {
-  border-left: 6px solid #ddd;
-  padding-left: 12px;
-  color: gray;
 }

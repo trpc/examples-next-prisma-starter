@@ -90,7 +90,7 @@ function JobListItem(props: {
   const router = useRouter();
   const showScore = useIsDev();
   return (
-    <article key={item.id}>
+    <article key={item.id} className="JobListItem">
       <Link href={`/job/${item.$slug}`}>
         <a className="block hover:bg-gray-50">
           <div className="px-4 py-4 sm:px-6">
