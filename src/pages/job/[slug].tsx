@@ -1,11 +1,11 @@
 import { useRouter } from 'next/dist/client/router';
 import ReactMarkdown from 'react-markdown';
-import { trpc } from 'utils/trpc';
+import { useQuery } from 'utils/trpc';
 
 export default function JobPage() {
   const slug = useRouter().query.slug as string;
 
-  const query = trpc.useQuery(['job.public.bySlug', slug]);
+  const query = useQuery(['job.public.bySlug', slug]);
 
   const job = query.data;
 

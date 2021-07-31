@@ -1,20 +1,20 @@
+import {
+  AdjustmentsIcon,
+  CalendarIcon,
+  LocationMarkerIcon,
+  OfficeBuildingIcon,
+} from '@heroicons/react/solid';
+import clsx from 'clsx';
+import { Footer } from 'components/Footer';
 import { useDebouncedCallback } from 'hooks/useDebouncedCallback';
 import { useParams } from 'hooks/useParams';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { inferQueryOutput, trpc } from '../utils/trpc';
-import {
-  CalendarIcon,
-  LocationMarkerIcon,
-  UsersIcon,
-  OfficeBuildingIcon,
-  AdjustmentsIcon,
-} from '@heroicons/react/solid';
-import { Footer } from 'components/Footer';
-import clsx from 'clsx';
-import { useRouter } from 'next/router';
+import { useIsDev } from '../hooks/useIsDev';
+import { inferQueryOutput, useQuery, useUtils } from '../utils/trpc';
 function useFilters() {
   return useParams({
     q: 'string',
@@ -23,12 +23,6 @@ function useFilters() {
       default: 0,
     },
   });
-}
-
-function useIsDev() {
-  const router = useRouter();
-  const dev = 'dev' in router.query;
-  return dev;
 }
 
 function SearchForm() {
@@ -65,7 +59,7 @@ function SearchForm() {
   );
 }
 function HeroSection() {
-  const sources = trpc.useQuery(['public.sources']);
+  const sources = useQuery(['public.sources']);
   return (
     <div className="py-10 text-center">
       <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
@@ -180,10 +174,10 @@ export default function IndexPage() {
     () => ({ query: values.q, cursor: values.page }),
     [values.page, values.q],
   );
-  const jobsQuery = trpc.useQuery(['algolia.public.search', input], {
+  const jobsQuery = useQuery(['algolia.public.search', input], {
     keepPreviousData: true,
   });
-  const utils = trpc.useContext();
+  const utils = useUtils();
 
   const hasPrevPage = values.page > 0;
   const hasNextPage = !!(

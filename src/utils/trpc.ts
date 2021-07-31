@@ -8,7 +8,7 @@ import type { AppRouter } from 'server/routers/app';
  * A set of strongly-typed React hooks from your `AppRouter` type signature with `createReactQueryHooks`.
  * @link https://trpc.io/docs/react#3-create-trpc-hooks
  */
-export const trpc = createReactQueryHooks<AppRouter>();
+const trpc = createReactQueryHooks<AppRouter>();
 
 // export const transformer = superjson;
 /**
@@ -26,3 +26,8 @@ export type inferQueryOutput<
 export type inferQueryInput<
   TRouteKey extends keyof AppRouter['_def']['queries'],
 > = inferProcedureInput<AppRouter['_def']['queries'][TRouteKey]>;
+
+export const useQuery = trpc.useQuery;
+export const useInfiniteQuery = trpc.useInfiniteQuery;
+export const useMutation = trpc.useMutation;
+export const useUtils = trpc.useContext;

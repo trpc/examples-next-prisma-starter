@@ -1,4 +1,12 @@
+import clsx from 'clsx';
+import { useIsDev } from 'hooks/useIsDev';
+import { useQuery, useMutation } from 'utils/trpc';
+
 export function Footer() {
+  const sources = useQuery(['public.sources']);
+  const reindex = useMutation('cron.reindex');
+  const pull = useMutation('cron.pull');
+  const isDev = useIsDev();
   return (
     <footer className="bg-gray-800" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
@@ -52,20 +60,29 @@ export function Footer() {
                   ))}
                 </ul> */}
               </div>
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold tracking-wider text-gray-400 uppercase">
-                  Legal
-                </h3>
-                {/* <ul className="mt-4 space-y-4">
-                  {navigation.legal.map((item) => (
-                    <li key={item.name}>
-                      <a href={item.href} className="text-base text-gray-300 hover:text-white">
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul> */}
-              </div>
+              {isDev && (
+                <div className="mt-12 md:mt-0">
+                  <h3 className="text-sm font-semibold tracking-wider text-gray-400 uppercase">
+                    ⚙️ Dev
+                  </h3>
+                  <ul className="mt-4 space-y-4">
+                    {sources.data?.map((source) => (
+                      <li key={source.id}>
+                        <button
+                          onClick={() => pull.mutate(source.slug)}
+                          disabled={pull.isLoading}
+                          className={clsx(
+                            'text-base text-gray-300 hover:text-white',
+                            pull.isLoading && 'opacity-20',
+                          )}
+                        >
+                          {source.slug}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-8 xl:mt-0">
