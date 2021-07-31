@@ -1,5 +1,6 @@
 import { inferAsyncReturnType } from '@trpc/server';
 import algoliasearch from 'algoliasearch';
+import _ from 'lodash';
 import { env } from 'server/env';
 import { prisma } from 'server/trpc';
 import { getAppState, setAppState } from './appState';
@@ -19,12 +20,43 @@ async function getAlgoliaEntries(since: Date | null) {
     },
   });
 
+  const words: [string, number][] = [
+    ['typescript', 10],
+    ['node.js', 2],
+    ['nodejs', 2],
+    ['deno', 3],
+    ['react', 1],
+    ['svelte', 1],
+    ['vue', 1],
+    ['rails', -1],
+    ['ruby', -1],
+    ['laravel', -1],
+  ];
+  const list = words.map(([str, weight]) => ({
+    str,
+    weight,
+    regex: new RegExp(str, 'ig'),
+  }));
+  function getScore(job: typeof items[number]) {
+    const numMatches = (str: string) =>
+      list.reduce((sum, { regex, weight }) => {
+        return sum + (str.match(regex)?.length ?? 0) * weight;
+      }, 0);
+    const score =
+      numMatches(job.title) * 100 +
+      numMatches(job.tags.join('')) * 10 +
+      numMatches(job.text) * 1;
+
+    return score;
+  }
+
   return items.map((job) => ({
     objectID: job.id,
     ...job,
     createdAtTimestamp: job.createdAt.getTime() / 1000,
     updatedAtTimestamp: job.createdAt.getTime() / 1000,
     deletedAtTimestamp: job.deletedAt ? job.deletedAt.getTime() / 100 : null,
+    __score: getScore(job),
   }));
 }
 
@@ -36,25 +68,22 @@ async function updateSettings() {
       'title',
       'tags',
       'sourceSlug',
-      'text',
       'company.name',
+      'text',
     ],
-    ranking: [
-      'proximity',
-      'desc(publishDate)',
-      'desc(updatedAtTimestamp)',
-      'desc(createdAtTimestamp)',
-    ],
+    customRanking: ['desc(__score)'],
     attributesForFaceting: ['deletedAt'],
+    ranking: ['custom'],
   });
 }
 
-export async function alogliaReindex() {
+export async function alogliaReindex(opts: { flush?: boolean } = {}) {
   const now = new Date();
   const { lastReindex } = await getAppState();
-  const items = await getAlgoliaEntries(lastReindex);
+  const since = opts.flush ? null : lastReindex;
+  const items = await getAlgoliaEntries(since);
 
-  lastReindex
+  since
     ? await algoliaIndex.saveObjects(items)
     : await algoliaIndex.replaceAllObjects(items);
 
@@ -64,5 +93,14 @@ export async function alogliaReindex() {
   return {
     count: items.length,
     appId: env.ALGOLIA_APP_ID,
+    jobs: _(items)
+      .map((item) => ({
+        id: item.id,
+        title: item.title,
+        __score: item.__score,
+      }))
+      .sortBy('__score')
+      .reverse()
+      .value(),
   };
 }

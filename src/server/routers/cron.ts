@@ -10,6 +10,7 @@ import { SOURCES } from 'server/crawlers/sources';
 import { z } from 'zod';
 
 export const cronRouter = createRouter()
+  // TODO make private / auth
   .query('reindex', {
     async resolve() {
       return await alogliaReindex();

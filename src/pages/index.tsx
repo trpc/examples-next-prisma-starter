@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { inferQueryInput, trpc } from '../utils/trpc';
+import { trpc } from '../utils/trpc';
 
 function useFilters() {
   return useParams({
@@ -145,6 +145,7 @@ export default function IndexPage() {
                 ))}
               </p>
             )}
+            <p>__score: {item.__score}</p>
             <Link href={`/job/${item.$slug}`}>
               <a>View job</a>
             </Link>

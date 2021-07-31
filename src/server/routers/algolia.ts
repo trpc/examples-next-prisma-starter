@@ -2,14 +2,19 @@
 /**
  * This file contains the root router of your tRPC-backend
  */
-import { algoliaIndex, AlgoliaJob } from 'server/utils/algolia';
+import { algoliaIndex, AlgoliaJob, alogliaReindex } from 'server/utils/algolia';
 import { z } from 'zod';
 import { createRouter } from '../trpc';
 import _ from 'lodash';
 import { slugify } from 'server/utils/slugify';
 
 export const algoliaRouter = createRouter()
-  //
+  // TODO make private / authed
+  .query('reindex', {
+    resolve() {
+      return alogliaReindex({ flush: true });
+    },
+  })
   .query('public.search', {
     input: z
       .object({
@@ -22,7 +27,9 @@ export const algoliaRouter = createRouter()
       const query = args.query ?? '';
       const page = args.cursor ?? 0;
 
-      const res = await algoliaIndex.search<AlgoliaJob>(query, { page });
+      const raw = await algoliaIndex.search<AlgoliaJob>(query, {
+        page,
+      });
 
       const fieldsForHighlights = ['title', 'tags'] as const;
       const relevantFields = [
@@ -30,11 +37,12 @@ export const algoliaRouter = createRouter()
         // pick only what we need for page
         ...fieldsForHighlights,
         'id',
+        '__score',
       ] as const;
 
-      return {
-        ..._.pick(res, ['nbHits', 'pages', 'page', 'nbPages']),
-        hits: res.hits.map((job) => {
+      const res = {
+        ..._.pick(raw, ['nbHits', 'pages', 'page', 'nbPages']),
+        hits: raw.hits.map((job) => {
           const essentials = _.pick(job, relevantFields);
 
           // ugly way of overriding job deets with markdown with highlights
@@ -44,7 +52,10 @@ export const algoliaRouter = createRouter()
               continue;
             }
             if (!Array.isArray(hl)) {
-              essentials[key] = (hl as any).value.replace(/<\/?em>/gi, '*');
+              (essentials as any)[key] = (hl as any).value.replace(
+                /<\/?em>/gi,
+                '*',
+              );
               continue;
             }
             // array in array, sue me
@@ -69,5 +80,6 @@ export const algoliaRouter = createRouter()
           };
         }),
       };
+      return res;
     },
   });
