@@ -29,24 +29,26 @@ export const algoliaRouter = createRouter()
 
       const raw = await algoliaIndex.search<AlgoliaJob>(query, {
         page,
+        filters: '__tags:not-deleted',
       });
 
-      const fieldsForHighlights = ['title', 'tags'] as const;
+      const fieldsForHighlights = ['title', 'tags', 'location'] as const;
       const relevantFields = [
         'id',
         // pick only what we need for page
         ...fieldsForHighlights,
         'id',
         '__score',
+        'company',
       ] as const;
 
       const res = {
-        ..._.pick(raw, ['nbHits', 'pages', 'page', 'nbPages']),
+        ..._.pick(raw, ['nbHits', 'pages', 'page', 'nbPages', 'hitsPerPage']),
         hits: raw.hits.map((job) => {
           const essentials = _.pick(job, relevantFields);
 
           // ugly way of overriding job deets with markdown with highlights
-          for (const key of relevantFields) {
+          for (const key of fieldsForHighlights) {
             const hl = job._highlightResult?.[key];
             if (!hl) {
               continue;

@@ -27,7 +27,7 @@ jobs:
         uses: bahmutov/npm-install@v1
       # - run: yarn install
 
-      - run: yarn build
+      - run: yarn build-vercel
         env:
           DATABASE_URL: postgresql://postgres:@localhost:5432/trpcdb
       - run: yarn lint

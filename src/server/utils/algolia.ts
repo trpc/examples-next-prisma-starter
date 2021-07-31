@@ -57,6 +57,7 @@ async function getAlgoliaEntries(since: Date | null) {
     updatedAtTimestamp: job.createdAt.getTime() / 1000,
     deletedAtTimestamp: job.deletedAt ? job.deletedAt.getTime() / 100 : null,
     __score: getScore(job),
+    __tags: [job.deletedAt ? 'deleted' : 'not-deleted'],
   }));
 }
 
@@ -70,9 +71,17 @@ async function updateSettings() {
       'sourceSlug',
       'company.name',
       'text',
+      'location',
     ],
-    customRanking: ['desc(__score)'],
-    attributesForFaceting: ['deletedAt'],
+    customRanking: [
+      //
+      'desc(__score)',
+    ],
+    attributesForFaceting: [
+      //
+      '__tags',
+      'location',
+    ],
   });
 }
 
@@ -97,6 +106,7 @@ export async function alogliaReindex(opts: { flush?: boolean } = {}) {
         id: item.id,
         title: item.title,
         __score: item.__score,
+        __tags: item.__tags,
       }))
       .sortBy('__score')
       .reverse()

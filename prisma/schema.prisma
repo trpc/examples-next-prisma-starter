@@ -46,6 +46,7 @@ model Job {
   applyUrl    String
   text        String
   remote      Boolean
+  location    String?
   publishDate DateTime
   tags        String[]
   jobType     JobType  @default(UNKNOWN)

@@ -56,6 +56,7 @@ export const remoteok: SourceFn = async () => {
       sourceKey: item.id,
       tags: item.tags,
       text: item.description,
+      location: item.location,
     };
     if (item.description) {
       job.text = item.description;

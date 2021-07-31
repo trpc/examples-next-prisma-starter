@@ -74,6 +74,7 @@ export const remotive: SourceFn = async () => {
       text: data.description,
       sourceJSON: JSON.stringify(json),
       jobType: data.job_type,
+      location: data.candidate_required_location || 'Anywhere',
     };
     if (data.description) {
       job.text = data.description;
