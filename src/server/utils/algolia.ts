@@ -73,7 +73,6 @@ async function updateSettings() {
     ],
     customRanking: ['desc(__score)'],
     attributesForFaceting: ['deletedAt'],
-    ranking: ['custom'],
   });
 }
 
