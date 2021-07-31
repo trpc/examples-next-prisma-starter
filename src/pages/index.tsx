@@ -14,6 +14,7 @@ import {
 } from '@heroicons/react/solid';
 import { Footer } from 'components/Footer';
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 function useFilters() {
   return useParams({
     q: 'string',
@@ -22,6 +23,12 @@ function useFilters() {
       default: 0,
     },
   });
+}
+
+function useIsDev() {
+  const router = useRouter();
+  const dev = 'dev' in router.query;
+  return dev;
 }
 
 function SearchForm() {
@@ -86,13 +93,15 @@ function JobListItem(props: {
   item: inferQueryOutput<'algolia.public.search'>['hits'][number];
 }) {
   const { item } = props;
+  const router = useRouter();
+  const showScore = useIsDev();
   return (
     <article key={item.id}>
       <Link href={`/job/${item.$slug}`}>
         <a className="block hover:bg-gray-50">
           <div className="px-4 py-4 sm:px-6">
             <div className="flex items-center justify-between">
-              <h3 className="flex-shrink-0 text-sm font-medium text-primary-600">
+              <h3 className="flex-shrink-0 text-sm font-medium text-primary-400">
                 <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
                   {item.title}
                 </ReactMarkdown>
@@ -133,15 +142,17 @@ function JobListItem(props: {
                     className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                     aria-hidden="true"
                   />
-                  {item.company.name}
+                  {item.companyName}
                 </p>
-                <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                  <AdjustmentsIcon
-                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                  {item.__score}
-                </p>
+                {showScore && (
+                  <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                    <AdjustmentsIcon
+                      className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    {item.__score}
+                  </p>
+                )}
               </div>
               <div className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0">
                 <CalendarIcon

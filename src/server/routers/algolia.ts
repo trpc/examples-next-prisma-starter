@@ -32,14 +32,18 @@ export const algoliaRouter = createRouter()
         filters: '__tags:not-deleted',
       });
 
-      const fieldsForHighlights = ['title', 'tags', 'location'] as const;
+      const fieldsForHighlights = [
+        'title',
+        'tags',
+        'location',
+        'companyName',
+      ] as const;
       const relevantFields = [
         'id',
         // pick only what we need for page
         ...fieldsForHighlights,
         'id',
         '__score',
-        'company',
       ] as const;
 
       const res = {

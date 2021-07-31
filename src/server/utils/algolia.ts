@@ -53,6 +53,7 @@ async function getAlgoliaEntries(since: Date | null) {
   return items.map((job) => ({
     objectID: job.id,
     ...job,
+    companyName: job.company.name,
     createdAtTimestamp: job.createdAt.getTime() / 1000,
     updatedAtTimestamp: job.createdAt.getTime() / 1000,
     deletedAtTimestamp: job.deletedAt ? job.deletedAt.getTime() / 100 : null,
@@ -69,7 +70,7 @@ async function updateSettings() {
       'title',
       'tags',
       'sourceSlug',
-      'company.name',
+      'companyName',
       'text',
       'location',
     ],
