@@ -79,6 +79,7 @@ export const algoliaRouter = createRouter()
 
           return {
             ...essentials,
+            companyLogoUrl: job.company.logoUrl,
             // algolia gives us a json date string
             publishDate: new Date(job.publishDate),
             // $ indicates virtual field
