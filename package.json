@@ -42,6 +42,7 @@
   "dependencies": {
     "@heroicons/react": "^1.0.3",
     "@prisma/client": "^2.18.0",
+    "@splitbee/web": "^0.2.4",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "@trpc/client": "^8.4.1",
