@@ -60,7 +60,6 @@ function SearchForm() {
       <input
         type="search"
         id="search"
-        autoFocus
         className="block w-full text-center border-gray-300 rounded-md shadow-sm focus:ring-primary-600 focus:border-primary-500 sm:text-lg"
         name="q"
         placeholder="Search for anything..."
