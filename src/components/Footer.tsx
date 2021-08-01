@@ -18,8 +18,18 @@ export function Footer() {
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm font-semibold tracking-wider text-gray-400 uppercase">
-                  Solutions
+                  Links
                 </h3>
+                <ul className="mt-4 space-y-4">
+                  <li>
+                    <a
+                      href="https://twitter.com/alexdotjs"
+                      className="text-base text-gray-300 hover:text-white"
+                    >
+                      @alexdotjs on Twitter
+                    </a>
+                  </li>
+                </ul>
                 {/* <ul className="mt-4 space-y-4">
                   {navigation.solutions.map((item) => (
                     <li key={item.name}>
@@ -28,21 +38,8 @@ export function Footer() {
                       </a>
                     </li>
                   ))}
-                </ul> */}
-              </div>
-              <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold tracking-wider text-gray-400 uppercase">
-                  Support
-                </h3>
-                {/* <ul className="mt-4 space-y-4">
-                  {navigation.support.map((item) => (
-                    <li key={item.name}>
-                      <a href={item.href} className="text-base text-gray-300 hover:text-white">
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul> */}
+                </ul> 
+                */}
               </div>
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
@@ -100,7 +97,7 @@ export function Footer() {
             </div>
           </div>
           <div className="mt-8 xl:mt-0">
-            <h3 className="text-sm font-semibold tracking-wider text-gray-400 uppercase">
+            {/* <h3 className="text-sm font-semibold tracking-wider text-gray-400 uppercase">
               Subscribe to new jobs
             </h3>
             <p className="mt-4 text-base text-gray-300">
@@ -127,7 +124,7 @@ export function Footer() {
                   Subscribe
                 </button>
               </div>
-            </form>
+            </form> */}
           </div>
         </div>
         <div className="pt-8 mt-8 border-t border-gray-700 md:flex md:items-center md:justify-between">
@@ -140,7 +137,27 @@ export function Footer() {
             ))} */}
           </div>
           <p className="mt-8 text-base text-gray-400 md:mt-0 md:order-1">
-            &copy; 2020 KATTCORP AB. All rights reserved.
+            &copy; {new Date().getFullYear()} KATTCORP AB. All rights reserved.
+            <br />
+            This site was started as a reference project for{' '}
+            <a
+              href="https://trpc.io"
+              target="_blank"
+              rel="noreferrer"
+              className="underline hover:text-gray-200"
+            >
+              tRPC
+            </a>{' '}
+            and the{' '}
+            <a
+              href="https://trpc.io"
+              target="_blank"
+              rel="noreferrer"
+              className="underline hover:text-gray-200"
+            >
+              source is on Github
+            </a>
+            .
           </p>
         </div>
       </div>
