@@ -73,13 +73,27 @@ export function Footer() {
                           disabled={pull.isLoading}
                           className={clsx(
                             'text-base text-gray-300 hover:text-white',
-                            pull.isLoading && 'opacity-20',
+                            pull.isLoading &&
+                              'animate-pulse cursor-not-allowed',
                           )}
                         >
                           {source.slug}
                         </button>
                       </li>
                     ))}
+                    <li>
+                      <button
+                        onClick={() => reindex.mutate(null)}
+                        disabled={reindex.isLoading}
+                        className={clsx(
+                          'text-base text-gray-300 hover:text-white',
+                          reindex.isLoading &&
+                            'animate-pulse cursor-not-allowed',
+                        )}
+                      >
+                        reindex
+                      </button>
+                    </li>
                   </ul>
                 </div>
               )}
