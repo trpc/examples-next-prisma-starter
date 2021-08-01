@@ -63,9 +63,8 @@ function HeroSection() {
   return (
     <div className="py-10 text-center">
       <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-        <span className="block xl:inline">Find your next</span>{' '}
-        <span className="block text-primary-500 xl:inline">TypeScript</span>{' '}
-        opportunity
+        <span className="block xl:inline">Find a job writing </span>{' '}
+        <span className="block text-primary-500 xl:inline">TypeScript</span>
       </h1>
       <p className="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
         A niche job posting site - only for TypeScript jobs - currently sourcing
@@ -211,61 +210,63 @@ export default function IndexPage() {
         <title>TypeScript.careers</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="p-2 pb-10 bg-primary-100">
-        <HeroSection />
-        <div className="max-w-5xl mx-auto overflow-hidden bg-white shadow sm:rounded-md">
-          <ul className="divide-y divide-gray-200">
-            {data?.hits.map((item) => (
-              <JobListItem key={item.id} item={item} />
-            ))}
-          </ul>
 
-          <nav
-            className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6"
-            aria-label="Pagination"
-          >
-            <div className="hidden sm:block">
-              <p className="text-sm text-gray-700">
-                Page <span className="font-medium">{values.page + 1}</span> of{' '}
-                <span className="font-medium">{data?.nbPages}</span> from{' '}
-                <span className="font-medium">{data?.nbHits}</span> total hits
-              </p>
-            </div>
-            <div className="flex justify-between flex-1 space-x-2 sm:justify-end">
-              <Link
-                href={{
-                  query: getParams({ page: values.page - 1 }),
-                }}
-              >
-                <a
-                  className={clsx(
-                    `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
-                    !hasPrevPage &&
-                      'pointer-events-none cursor-not-allowed opacity-20',
-                  )}
-                >
-                  Previous
-                </a>
-              </Link>
+      <HeroSection />
+      <a id="jobs" />
+      <div className="max-w-5xl mx-auto my-4 overflow-hidden bg-white shadow sm:rounded-md">
+        <ul className="divide-y divide-gray-200">
+          {data?.hits.map((item) => (
+            <JobListItem key={item.id} item={item} />
+          ))}
+        </ul>
 
-              <Link
-                href={{
-                  query: getParams({ page: values.page + 1 }),
-                }}
+        <nav
+          className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6"
+          aria-label="Pagination"
+        >
+          <div className="hidden sm:block">
+            <p className="text-sm text-gray-700">
+              Page <span className="font-medium">{values.page + 1}</span> of{' '}
+              <span className="font-medium">{data?.nbPages}</span> from{' '}
+              <span className="font-medium">{data?.nbHits}</span> total hits
+            </p>
+          </div>
+          <div className="flex justify-between flex-1 space-x-2 sm:justify-end">
+            <Link
+              href={{
+                query: getParams({ page: values.page - 1 }),
+                hash: 'jobs',
+              }}
+            >
+              <a
+                className={clsx(
+                  `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
+                  !hasPrevPage &&
+                    'pointer-events-none cursor-not-allowed opacity-20',
+                )}
               >
-                <a
-                  className={clsx(
-                    `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
-                    !hasNextPage &&
-                      'pointer-events-none cursor-not-allowed opacity-20',
-                  )}
-                >
-                  Next
-                </a>
-              </Link>
-            </div>
-          </nav>
-        </div>
+                Previous
+              </a>
+            </Link>
+
+            <Link
+              href={{
+                query: getParams({ page: values.page + 1 }),
+                hash: 'jobs',
+              }}
+            >
+              <a
+                className={clsx(
+                  `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
+                  !hasNextPage &&
+                    'pointer-events-none cursor-not-allowed opacity-20',
+                )}
+              >
+                Next
+              </a>
+            </Link>
+          </div>
+        </nav>
       </div>
 
       <Footer />

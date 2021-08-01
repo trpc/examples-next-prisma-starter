@@ -5,6 +5,7 @@
 
 html {
   scroll-behavior: smooth;
+  @apply bg-primary-100;
 }
 
 .JobListItem em {
