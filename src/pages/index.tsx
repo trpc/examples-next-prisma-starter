@@ -12,7 +12,7 @@ import { useParams } from 'hooks/useParams';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useIsDev } from '../hooks/useIsDev';
 import { inferQueryOutput, useQuery, useUtils } from '../utils/trpc';
@@ -90,10 +90,19 @@ function HeroSection() {
         <br />
         <span className="italic opacity-40">
           (currently sourcing from{' '}
-          {sources.data
-            ?.map((source) => source.slug)
-            .sort()
-            .join(', ')}
+          {sources.data?.map((source, index) => (
+            <Fragment key={source.slug}>
+              <a
+                href={source.url}
+                className="hover:underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {source.name}
+              </a>
+              {index < sources.data.length - 1 ? ', ' : ''}
+            </Fragment>
+          ))}
           )
         </span>
       </p>

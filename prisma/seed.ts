@@ -5,10 +5,12 @@ const sources: Omit<Source, 'id'>[] = [
   {
     slug: 'remoteok',
     url: 'https://remoteok.io',
+    name: 'RemoteOK',
   },
   {
     slug: 'remotive',
     url: 'https://remotive.io',
+    name: 'Remotive',
   },
 ];
 async function main() {
