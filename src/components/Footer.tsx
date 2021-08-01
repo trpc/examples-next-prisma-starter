@@ -150,7 +150,7 @@ export function Footer() {
             </a>{' '}
             and the{' '}
             <a
-              href="https://trpc.io"
+              href="https://github.com/KATT/typescript.careers"
               target="_blank"
               rel="noreferrer"
               className="underline hover:text-gray-200"
