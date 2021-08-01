@@ -10,7 +10,9 @@ import 'styles/global.css';
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
-      <Component {...pageProps} />
+      <div className="flex flex-col justify-between min-h-screen">
+        <Component {...pageProps} />
+      </div>
     </>
   );
 };

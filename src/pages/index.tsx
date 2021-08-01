@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/solid';
 import clsx from 'clsx';
 import { Footer } from 'components/Footer';
+import { Main } from 'components/Main';
 import { useDebouncedCallback } from 'hooks/useDebouncedCallback';
 import { useParams } from 'hooks/useParams';
 import Head from 'next/head';
@@ -24,6 +25,22 @@ function useFilters() {
     },
   });
 }
+function useJobsQuery() {
+  const filters = useFilters();
+  const values = filters.values;
+  const input = useMemo(
+    () => ({ query: values.q, cursor: values.page }),
+    [values.page, values.q],
+  );
+  const jobsQuery = useQuery(['algolia.public.search', input], {
+    keepPreviousData: true,
+  });
+  const hasPrevPage = values.page > 0;
+  const hasNextPage = !!(
+    jobsQuery.data?.nbPages && values.page < jobsQuery.data.nbPages - 1
+  );
+  return { jobsQuery, hasPrevPage, hasNextPage, filters };
+}
 
 function SearchForm() {
   const params = useFilters();
@@ -37,12 +54,12 @@ function SearchForm() {
   }, [params.values.q]);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()} className="block w-full">
       <input
         type="search"
         id="search"
         autoFocus
-        className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-primary-600 focus:border-primary-500 sm:text-lg"
+        className="block w-full text-center border-gray-300 rounded-md shadow-sm focus:ring-primary-600 focus:border-primary-500 sm:text-lg"
         name="q"
         placeholder="Search for anything..."
         onChange={(e) => {
@@ -67,13 +84,17 @@ function HeroSection() {
         <span className="block text-primary-500 xl:inline">TypeScript</span>
       </h1>
       <p className="max-w-md mx-auto mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-        A niche job posting site - only for TypeScript jobs - currently sourcing
-        from:{' '}
-        {sources.data
-          ?.map((source) => source.slug)
-          .sort()
-          .join(', ')}
-        .
+        A niche job board - only for TypeScript jobs - aggregated from a bunch
+        of places.
+        <br />
+        <span className="italic opacity-40">
+          (currently sourcing from{' '}
+          {sources.data
+            ?.map((source) => source.slug)
+            .sort()
+            .join(', ')}
+          )
+        </span>
       </p>
       <div className="max-w-md mx-auto mt-5 sm:flex sm:justify-center md:mt-8">
         <SearchForm />
@@ -86,7 +107,6 @@ function JobListItem(props: {
   item: inferQueryOutput<'algolia.public.search'>['hits'][number];
 }) {
   const { item } = props;
-  const router = useRouter();
   const showScore = useIsDev();
   return (
     <article key={item.id} className="JobListItem">
@@ -167,6 +187,61 @@ function JobListItem(props: {
   );
 }
 
+function JobListPagination() {
+  const { jobsQuery, filters, hasPrevPage, hasNextPage } = useJobsQuery();
+  const { values, getParams } = filters;
+  const data = jobsQuery.data;
+  return (
+    <nav
+      className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6"
+      aria-label="Pagination"
+    >
+      <div className="hidden sm:block">
+        <p className="text-sm text-gray-700">
+          Page <span className="font-medium">{values.page + 1}</span> of{' '}
+          <span className="font-medium">{data?.nbPages}</span> from{' '}
+          <span className="font-medium">{data?.nbHits}</span> total hits
+        </p>
+      </div>
+      <div className="flex justify-between flex-1 space-x-2 sm:justify-end">
+        <Link
+          href={{
+            query: filters.getParams({ page: values.page - 1 }),
+            hash: 'main',
+          }}
+        >
+          <a
+            className={clsx(
+              `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
+              !hasPrevPage &&
+                'pointer-events-none cursor-not-allowed opacity-20',
+            )}
+          >
+            Previous
+          </a>
+        </Link>
+
+        <Link
+          href={{
+            query: getParams({ page: values.page + 1 }),
+            hash: 'main',
+          }}
+        >
+          <a
+            className={clsx(
+              `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
+              !hasNextPage &&
+                'pointer-events-none cursor-not-allowed opacity-20',
+            )}
+          >
+            Next
+          </a>
+        </Link>
+      </div>
+    </nav>
+  );
+}
+
 export default function IndexPage() {
   const { values, getParams } = useFilters();
   const input = useMemo(
@@ -212,63 +287,25 @@ export default function IndexPage() {
       </Head>
 
       <HeroSection />
-      <a id="jobs" />
-      <div className="max-w-5xl mx-auto my-4 overflow-hidden bg-white shadow sm:rounded-md">
-        <ul className="divide-y divide-gray-200">
-          {data?.hits.map((item) => (
-            <JobListItem key={item.id} item={item} />
-          ))}
-        </ul>
-
-        <nav
-          className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6"
-          aria-label="Pagination"
-        >
-          <div className="hidden sm:block">
-            <p className="text-sm text-gray-700">
-              Page <span className="font-medium">{values.page + 1}</span> of{' '}
-              <span className="font-medium">{data?.nbPages}</span> from{' '}
-              <span className="font-medium">{data?.nbHits}</span> total hits
-            </p>
-          </div>
-          <div className="flex justify-between flex-1 space-x-2 sm:justify-end">
-            <Link
-              href={{
-                query: getParams({ page: values.page - 1 }),
-                hash: 'jobs',
-              }}
-            >
-              <a
-                className={clsx(
-                  `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
-                  !hasPrevPage &&
-                    'pointer-events-none cursor-not-allowed opacity-20',
-                )}
-              >
-                Previous
-              </a>
-            </Link>
-
-            <Link
-              href={{
-                query: getParams({ page: values.page + 1 }),
-                hash: 'jobs',
-              }}
-            >
-              <a
-                className={clsx(
-                  `relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50`,
-                  !hasNextPage &&
-                    'pointer-events-none cursor-not-allowed opacity-20',
-                )}
-              >
-                Next
-              </a>
-            </Link>
-          </div>
-        </nav>
-      </div>
-
+      <Main>
+        <div className="max-w-5xl mx-auto my-4 overflow-hidden bg-white shadow sm:rounded-md">
+          {data?.hits.length === 0 && (
+            <div className="p-4 text-center text-gray-600">
+              No hits on your search 😿
+            </div>
+          )}
+          {data?.hits && data.hits.length > 0 && (
+            <>
+              <ul className="divide-y divide-gray-200">
+                {data?.hits.map((item) => (
+                  <JobListItem key={item.id} item={item} />
+                ))}
+              </ul>
+              <JobListPagination />
+            </>
+          )}
+        </div>
+      </Main>
       <Footer />
     </>
   );
