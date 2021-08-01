@@ -1,6 +1,8 @@
+import splitbee from '@splitbee/web';
 import clsx from 'clsx';
 import { useIsDev } from 'hooks/useIsDev';
 import { useQuery, useMutation } from 'utils/trpc';
+import { A } from './A';
 
 export function Footer() {
   const sources = useQuery(['public.sources']);
@@ -22,12 +24,13 @@ export function Footer() {
                 </h3>
                 <ul className="mt-4 space-y-4">
                   <li>
-                    <a
+                    <A
                       href="https://twitter.com/alexdotjs"
                       className="text-base text-gray-300 hover:text-white"
+                      target="_blank"
                     >
                       @alexdotjs on Twitter
-                    </a>
+                    </A>
                   </li>
                 </ul>
                 {/* <ul className="mt-4 space-y-4">
@@ -140,23 +143,23 @@ export function Footer() {
             &copy; {new Date().getFullYear()} KATTCORP AB. All rights reserved.
             <br />
             This site was started as a reference project for{' '}
-            <a
+            <A
               href="https://trpc.io"
               target="_blank"
               rel="noreferrer"
               className="underline hover:text-gray-200"
             >
               tRPC
-            </a>{' '}
+            </A>{' '}
             and the{' '}
-            <a
+            <A
               href="https://github.com/KATT/typescript.careers"
               target="_blank"
               rel="noreferrer"
               className="underline hover:text-gray-200"
             >
               source is on Github
-            </a>
+            </A>
             .
           </p>
         </div>

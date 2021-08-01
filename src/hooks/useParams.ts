@@ -174,18 +174,18 @@ export function useParams<
 
   const result = useMemo(() => {
     const values: Record<string, unknown> = {};
-    let numSelected = 0;
+    let numDirty = 0;
     for (const k in resolvedParams) {
       const key = k as TKeys;
       const value = transform(key, query[key]);
       values[key] = value;
       if (!isEqual(value, resolvedParams[key].defaultValue)) {
-        numSelected++;
+        numDirty++;
       }
     }
     return {
       values: values as TResult,
-      numSelected,
+      numDirty,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, resolvedParams]);
@@ -257,6 +257,6 @@ export function useParams<
     resolvedParams,
     getParams,
     resetParams,
-    numSelected: result.numSelected,
+    numDirty: result.numDirty,
   };
 }
