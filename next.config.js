@@ -52,15 +52,7 @@ const securityHeaders = [
 
 module.exports = {
   images: {
-    domains: ['remoteok.io'],
-  },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-
-    return config;
+    domains: ['remoteok.io', 'remoteOK.io'],
   },
   async headers() {
     return [
