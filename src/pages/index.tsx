@@ -288,7 +288,12 @@ export default function IndexPage() {
 
       <HeroSection />
       <Main>
-        <div className="max-w-5xl mx-auto my-4 overflow-hidden bg-white shadow sm:rounded-md">
+        <div
+          className={clsx(
+            `max-w-5xl mx-auto my-4 overflow-hidden bg-white shadow sm:rounded-md`,
+            jobsQuery.isFetching && 'animate-pulse',
+          )}
+        >
           {data?.hits.length === 0 && (
             <div className="p-4 text-center text-gray-600">
               No hits on your search 😿
