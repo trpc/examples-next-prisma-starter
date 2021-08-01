@@ -109,14 +109,14 @@ function JobListItem(props: {
   item: inferQueryOutput<'algolia.public.search'>['hits'][number];
 }) {
   const { item } = props;
-  const showScore = useIsDev();
+  const isDev = useIsDev();
   return (
     <article key={item.id} className="JobListItem">
       <Link href={`/job/${item.$slug}`}>
         <a className="block hover:bg-gray-50">
           <div className="px-4 py-4 sm:px-6">
             <div className="items-center sm:flex">
-              {item.companyLogoUrl && (
+              {isDev && item.companyLogoUrl && (
                 <div className="relative flex-shrink-0 w-10 h-10 mb-2 sm:mr-2 sm:mb-0">
                   <Image
                     alt={item.companyName}
@@ -170,9 +170,11 @@ function JobListItem(props: {
                         className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
                         aria-hidden="true"
                       />
-                      {item.companyName}
+                      <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
+                        {item.companyName}
+                      </ReactMarkdown>
                     </p>
-                    {showScore && (
+                    {isDev && (
                       <p className="flex items-center mt-2 text-sm text-gray-500 sm:mt-0 sm:ml-6">
                         <AdjustmentsIcon
                           className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
