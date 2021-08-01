@@ -29,7 +29,8 @@ model Company {
 model Source {
   id   String  @id @default(uuid())
   slug String  @unique
-  url  String?
+  url  String
+  name String?
   Job  Job[]
 }
 
