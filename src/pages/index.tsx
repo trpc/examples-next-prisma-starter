@@ -10,7 +10,7 @@ import { JobListItem } from 'components/JobListItem';
 import { JobListPagination } from 'components/JobListPagination';
 
 export default function IndexPage() {
-  const { values, getParams } = useFilters();
+  const { values } = useFilters();
   const input = useMemo(
     () => ({ query: values.q, cursor: values.page }),
     [values.page, values.q],
@@ -57,7 +57,7 @@ export default function IndexPage() {
       <Main>
         <div
           className={clsx(
-            `max-w-5xl mx-auto my-4 overflow-hidden bg-white shadow sm:rounded-md`,
+            `max-w-5xl mx-auto lg:my-4 overflow-hidden bg-white shadow lg:rounded-md`,
             jobsQuery.isFetching && 'animate-pulse',
           )}
         >

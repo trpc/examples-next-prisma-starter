@@ -11,7 +11,7 @@ export function HeroSection() {
         <span className="block text-gray-900 xl:inline">
           Find a job writing{' '}
         </span>{' '}
-        <span className="block text-transparent xl:inline bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">
+        <span className="block font-bold text-transparent xl:inline bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">
           TypeScript
         </span>
       </h1>

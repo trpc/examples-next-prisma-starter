@@ -1,5 +1,4 @@
 import {
-  AdjustmentsIcon,
   CalendarIcon,
   LocationMarkerIcon,
   OfficeBuildingIcon,
@@ -8,7 +7,6 @@ import { Footer } from 'components/Footer';
 import { Main } from 'components/Main';
 import { useIsDev } from 'hooks/useIsDev';
 import { useRouter } from 'next/dist/client/router';
-import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import { useQuery } from 'utils/trpc';
 
