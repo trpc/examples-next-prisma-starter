@@ -5,6 +5,7 @@ import { AppType } from 'next/dist/next-server/lib/utils';
 import { AppRouter } from 'server/routers/app';
 import superjson from 'superjson';
 import splitbee from '@splitbee/web';
+import '@fontsource/source-sans-pro';
 import 'tailwindcss/tailwind.css';
 import 'styles/global.css';
 import { useEffect } from 'react';
@@ -19,7 +20,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   return (
     <>
-      <div className="flex flex-col justify-between min-h-screen">
+      <div className="flex flex-col justify-between min-h-screen bg-gradient-to-b from-blue-200 to-blue-500">
         <Component {...pageProps} />
       </div>
     </>

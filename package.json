@@ -40,6 +40,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@fontsource/source-sans-pro": "^4.5.0",
     "@heroicons/react": "^1.0.3",
     "@prisma/client": "^2.18.0",
     "@splitbee/web": "^0.2.4",
