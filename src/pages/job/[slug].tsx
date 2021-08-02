@@ -11,6 +11,8 @@ import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import { useQuery } from 'utils/trpc';
+import { JobPostingJsonLd } from 'next-seo';
+import { NextWebVitalsMetric } from 'next/dist/next-server/lib/utils';
 
 export default function JobPage() {
   const slug = useRouter().query.slug as string;
@@ -82,6 +84,18 @@ export default function JobPage() {
                 <details>
                   <pre>{JSON.stringify(item, null, 4)}</pre>
                 </details>
+                <JobPostingJsonLd
+                  datePosted={item.publishDate.toDateString()}
+                  description={item.text}
+                  hiringOrganization={{
+                    name: item.company.name,
+                    sameAs: item.company.name,
+                  }}
+                  title={item.title}
+                  validThrough={item.publishDate
+                    .setDate(item.publishDate.getDate() + 90)
+                    .toString()}
+                />
               </>
             )}
           </div>

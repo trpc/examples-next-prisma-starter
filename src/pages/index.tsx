@@ -19,6 +19,7 @@ import { inferQueryOutput, useQuery, useUtils } from '../utils/trpc';
 import Image from 'next/image';
 import { A } from 'components/A';
 import splitbee from '@splitbee/web';
+import { NextSeo } from 'next-seo';
 
 function useFilters() {
   return useParams({
@@ -319,7 +320,10 @@ export default function IndexPage() {
         <title>TypeScript.careers</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <NextSeo
+        title="TypeScript.careers"
+        description="A niche job board - only for TypeScript jobs - aggregated from a bunch of places."
+      />
       <HeroSection />
       <Main>
         <div

@@ -8,6 +8,7 @@ import splitbee from '@splitbee/web';
 import 'tailwindcss/tailwind.css';
 import 'styles/global.css';
 import { useEffect } from 'react';
+import { DefaultSeo } from 'next-seo';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   useEffect(() => {
