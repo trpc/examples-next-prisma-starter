@@ -1,4 +1,5 @@
 import { Prisma, Source } from '@prisma/client';
+import _ from 'lodash';
 import { prisma } from 'server/trpc';
 
 export type CompanyUpsert = Prisma.CompanyUpsertArgs['create'];
@@ -38,6 +39,7 @@ export async function bulkUpsertJobs(props: BulkUpsertJobProps) {
     tsItems.flatMap((item) => {
       const jobWithSourceId: Prisma.JobUpsertArgs['create'] = {
         ...item.job,
+        tags: _.uniq(item.job.tags),
         company: {
           connect: {
             name: item.company.name,

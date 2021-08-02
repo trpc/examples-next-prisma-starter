@@ -43,7 +43,7 @@ async function main() {
         remote: true,
         location: 'Nowhere',
         publishDate: new Date(),
-        tags: [],
+        tags: ['cats'],
         jobType: 'UNKNOWN',
         sourceKey: 'tmp',
         source: {

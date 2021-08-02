@@ -4,22 +4,21 @@ import {
   LocationMarkerIcon,
   OfficeBuildingIcon,
 } from '@heroicons/react/solid';
+import splitbee from '@splitbee/web';
 import clsx from 'clsx';
+import { A } from 'components/A';
 import { Footer } from 'components/Footer';
 import { Main } from 'components/Main';
 import { useDebouncedCallback } from 'hooks/useDebouncedCallback';
 import { useParams } from 'hooks/useParams';
+import { NextSeo } from 'next-seo';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useIsDev } from '../hooks/useIsDev';
 import { inferQueryOutput, useQuery, useUtils } from '../utils/trpc';
-import Image from 'next/image';
-import { A } from 'components/A';
-import splitbee from '@splitbee/web';
-import { NextSeo } from 'next-seo';
 
 function useFilters() {
   return useParams({
@@ -121,6 +120,37 @@ function HeroSection() {
   );
 }
 
+function TagList(props: { items: string[]; limit?: number }) {
+  const { limit: tagLimit = 6, items } = props;
+  const hidden = items.slice(tagLimit);
+
+  return (
+    <div className="flex-wrap justify-end hidden ml-2 text-right md:flex">
+      {props.items.map((tag, index) => (
+        <span
+          key={index}
+          className={clsx(
+            'px-2 mb-1 ml-1 text-xs font-semibold leading-5 text-gray-800 rounded-full bg-primary-100',
+            index > tagLimit - 1 ? 'hidden' : 'inline-flex',
+          )}
+        >
+          <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
+            {tag}
+          </ReactMarkdown>
+        </span>
+      ))}
+      {props.items.length > tagLimit && (
+        <span
+          className="inline-flex px-2 mb-1 ml-1 text-xs font-semibold leading-5 text-gray-800 rounded-full bg-primary-100"
+          title={hidden.join(', ')}
+        >
+          +{props.items.length - tagLimit}
+        </span>
+      )}
+    </div>
+  );
+}
+
 function JobListItem(props: {
   item: inferQueryOutput<'algolia.public.search'>['hits'][number];
 }) {
@@ -151,23 +181,7 @@ function JobListItem(props: {
                     </ReactMarkdown>
                   </h3>
                   <div className="flex-wrap justify-end hidden ml-2 text-right md:flex">
-                    {item.tags.length > 0 && (
-                      <>
-                        {item.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className="inline-flex px-2 mb-1 ml-1 text-xs font-semibold leading-5 text-gray-800 rounded-full bg-primary-100"
-                          >
-                            <ReactMarkdown
-                              allowedElements={['em']}
-                              unwrapDisallowed
-                            >
-                              {tag}
-                            </ReactMarkdown>
-                          </span>
-                        ))}
-                      </>
-                    )}
+                    <TagList items={item.tags} />
                   </div>
                 </div>
                 <div className="mt-2 sm:flex sm:justify-between">

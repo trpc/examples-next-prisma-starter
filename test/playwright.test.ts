@@ -10,6 +10,7 @@ test('go to /', async () => {
 
   await page.waitForSelector(`text=Seed TypeScript Job`);
   await page.waitForSelector(`text=Nowhere`);
+  await page.waitForSelector(`text=cats`);
 });
 
 export {};
