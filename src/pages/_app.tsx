@@ -9,6 +9,7 @@ import '@fontsource/source-sans-pro';
 import 'tailwindcss/tailwind.css';
 import 'styles/global.css';
 import { useEffect } from 'react';
+import { DefaultSeo } from 'next-seo';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   useEffect(() => {
@@ -21,6 +22,18 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
       <div className="flex flex-col justify-between min-h-screen bg-gradient-to-b from-blue-200 to-blue-500">
+        <DefaultSeo
+          openGraph={{
+            type: 'website',
+            locale: 'en_US',
+            url: 'https://typescript.careers/',
+            site_name: 'Typescript Careers',
+          }}
+          twitter={{
+            handle: '@alexdotjs',
+            cardType: 'summary_large_image',
+          }}
+        />
         <Component {...pageProps} />
       </div>
     </>

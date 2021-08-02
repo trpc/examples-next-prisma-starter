@@ -8,6 +8,7 @@ import { useFilters } from 'hooks/useFilters';
 import { HeroSection } from 'components/HeroSection';
 import { JobListItem } from 'components/JobListItem';
 import { JobListPagination } from 'components/JobListPagination';
+import { NextSeo } from 'next-seo';
 
 export default function IndexPage() {
   const { values } = useFilters();
@@ -52,7 +53,10 @@ export default function IndexPage() {
         <title>TypeScript.careers</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <NextSeo
+        title="TypeScript.careers"
+        description="A niche job board - only for TypeScript jobs - aggregated from a bunch of places."
+      />
       <HeroSection />
       <Main>
         <div
