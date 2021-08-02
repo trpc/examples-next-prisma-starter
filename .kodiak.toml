@@ -6,7 +6,7 @@ auto_approve_usernames = ["dependabot", "KATT"]
 
 [merge]
 method = "squash"
-automerge_label = ["🚀 merge", "⬆️ dependencies"]
+automerge_label = ["🚀 merge", "⬆️ dependencies", "merge"]
 
 [merge.automerge_dependencies]
 # only auto merge "minor" and "patch" version upgrades.
