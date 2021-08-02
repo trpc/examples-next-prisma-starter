@@ -9,6 +9,7 @@ import ReactMarkdown from 'react-markdown';
 import { useIsDev } from '../hooks/useIsDev';
 import { inferQueryOutput } from '../utils/trpc';
 import Image from 'next/image';
+import { TagList } from 'components/TagList';
 
 export function JobListItem(props: {
   item: inferQueryOutput<'algolia.public.search'>['hits'][number];
@@ -33,31 +34,13 @@ export function JobListItem(props: {
                 </div>
               )}
               <div className="flex-grow">
-                <div className="flex items-center justify-between">
+                <div className="flex items-start justify-between">
                   <h3 className="flex-shrink-0 text-xl font-medium text-primary-400">
                     <ReactMarkdown allowedElements={['em']} unwrapDisallowed>
                       {item.title}
                     </ReactMarkdown>
                   </h3>
-                  <div className="flex-wrap justify-end hidden ml-2 text-right md:flex">
-                    {item.tags.length > 0 && (
-                      <>
-                        {item.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className="inline-flex px-2 mb-1 ml-1 text-xs font-semibold leading-5 text-gray-800 rounded-full bg-primary-100"
-                          >
-                            <ReactMarkdown
-                              allowedElements={['em']}
-                              unwrapDisallowed
-                            >
-                              {tag}
-                            </ReactMarkdown>
-                          </span>
-                        ))}
-                      </>
-                    )}
-                  </div>
+                  <TagList tags={item.tags} />
                 </div>
                 <div className="mt-2 sm:flex sm:justify-between">
                   <div className="sm:flex">
