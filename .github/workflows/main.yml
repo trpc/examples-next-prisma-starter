@@ -3,6 +3,10 @@ on: [push]
 jobs:
   e2e:
     env:
+      ALGOLIA_ADMIN_KEY: ${{ secrets.CI_ALGOLIA_ADMIN_KEY }}
+      ALGOLIA_APP_ID: HL0PBWJ0L2
+      ALGOLIA_SEARCH_KEY: ${{ secrets.CI_ALGOLIA_SEARCH_KEY }}
+      DATABASE_URL: postgresql://postgres:@localhost:5432/trpcdb
       NODE_ENV: test
     runs-on: ${{ matrix.os }}
     strategy:
@@ -25,15 +29,8 @@ jobs:
 
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
-      # - run: yarn install
 
-      - run: yarn build-vercel
-        env:
-          DATABASE_URL: postgresql://postgres:@localhost:5432/trpcdb
       - run: yarn lint
+      - run: yarn build-vercel
       - run: yarn test-start
-        env:
-          DATABASE_URL: postgresql://postgres:@localhost:5432/trpcdb
       - run: yarn test-dev
-        env:
-          DATABASE_URL: postgresql://postgres:@localhost:5432/trpcdb
