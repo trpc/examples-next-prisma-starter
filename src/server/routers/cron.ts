@@ -43,4 +43,14 @@ export const cronRouter = createRouter()
 
       return { algolia, items: items.length };
     },
+  })
+  .query('keep-fresh', {
+    // endpoint for periodically fetching home page and keeping it edge-cached
+    async resolve({ ctx }) {
+      const res = await fetch(ctx.APP_URL);
+      if (!res.ok) {
+        throw new Error(`Status ${res.status}`);
+      }
+      return res.status;
+    },
   });

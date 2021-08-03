@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import * as trpc from '@trpc/server';
 import * as trpcNext from '@trpc/server/adapters/next';
+import { getBaseUrl } from 'utils/trpc';
 
 export const prisma = new PrismaClient({
   log:
@@ -8,6 +9,8 @@ export const prisma = new PrismaClient({
       ? ['query', 'error', 'warn']
       : ['error'],
 });
+
+const APP_URL = getBaseUrl();
 /**
  * Creates context for an incoming request
  * @link https://trpc.io/docs/context
@@ -35,6 +38,7 @@ export const createContext = async ({
     req,
     res,
     prisma,
+    APP_URL,
   };
 };
 
