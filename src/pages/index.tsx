@@ -304,7 +304,7 @@ export default function IndexPage() {
   });
   const utils = useUtils();
 
-  const hasPrevPage = values.page > 0;
+  const hasPrevPage = values.page > 1;
   const hasNextPage = !!(
     jobsQuery.data?.nbPages && jobsQuery.data.nbPages > values.page
   );
