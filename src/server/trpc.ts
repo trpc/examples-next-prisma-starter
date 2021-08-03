@@ -26,6 +26,7 @@ export const createContext = async ({
 
   // check if it's a query & public
   if (req.method === 'GET' && isPublic) {
+    console.log('🏎 Caching:', req.url);
     // cache request for 1 day + revalidate once every second
     const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
     res.setHeader(
