@@ -1,7 +1,6 @@
-import splitbee from '@splitbee/web';
 import clsx from 'clsx';
 import { useIsDev } from 'hooks/useIsDev';
-import { useQuery, useMutation } from 'utils/trpc';
+import { useMutation, useQuery } from 'utils/trpc';
 import { A } from './A';
 
 export function Footer() {

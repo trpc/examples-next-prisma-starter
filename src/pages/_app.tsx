@@ -1,14 +1,14 @@
+import splitbee from '@splitbee/web';
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { loggerLink } from '@trpc/client/links/loggerLink';
 import { withTRPC } from '@trpc/next';
-import { AppType } from 'next/dist/next-server/lib/utils';
-import { AppRouter } from 'server/routers/app';
-import superjson from 'superjson';
-import splitbee from '@splitbee/web';
-import 'tailwindcss/tailwind.css';
-import 'styles/global.css';
-import { useEffect } from 'react';
 import { DefaultSeo } from 'next-seo';
+import { AppType } from 'next/dist/next-server/lib/utils';
+import { useEffect } from 'react';
+import { AppRouter } from 'server/routers/app';
+import 'styles/global.css';
+import superjson from 'superjson';
+import 'tailwindcss/tailwind.css';
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   useEffect(() => {
@@ -20,6 +20,18 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   return (
     <>
+      <DefaultSeo
+        openGraph={{
+          type: 'website',
+          locale: 'en_US',
+          url: 'https://typescript.careers/',
+          site_name: 'Typescript Careers',
+        }}
+        twitter={{
+          handle: '@alexdotjs',
+          cardType: 'summary_large_image',
+        }}
+      />
       <div className="flex flex-col justify-between min-h-screen">
         <Component {...pageProps} />
       </div>
