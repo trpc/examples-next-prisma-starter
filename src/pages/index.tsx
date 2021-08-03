@@ -25,7 +25,7 @@ function useFilters() {
     q: 'string',
     page: {
       type: 'number',
-      default: 0,
+      default: 1,
     },
   });
 }
@@ -33,15 +33,15 @@ function useJobsQuery() {
   const filters = useFilters();
   const values = filters.values;
   const input = useMemo(
-    () => ({ query: values.q, cursor: values.page }),
+    () => ({ query: values.q, cursor: values.page - 1 }),
     [values.page, values.q],
   );
   const jobsQuery = useQuery(['algolia.public.search', input], {
     keepPreviousData: true,
   });
-  const hasPrevPage = values.page > 0;
+  const hasPrevPage = values.page > 1;
   const hasNextPage = !!(
-    jobsQuery.data?.nbPages && values.page < jobsQuery.data.nbPages - 1
+    jobsQuery.data?.nbPages && values.page < jobsQuery.data.nbPages
   );
   return { jobsQuery, hasPrevPage, hasNextPage, filters };
 }
@@ -50,7 +50,7 @@ function SearchForm() {
   const params = useFilters();
   const [value, setValue] = useState(params.values.q);
   const debouncedChange = useDebouncedCallback((newValue: string) => {
-    params.setParams({ q: newValue, page: 0 });
+    params.setParams({ q: newValue, page: 1 });
   }, 300);
 
   useEffect(() => {
@@ -247,7 +247,7 @@ function JobListPagination() {
     >
       <div className="hidden sm:block">
         <p className="text-sm text-gray-700">
-          Page <span className="font-medium">{values.page + 1}</span> of{' '}
+          Page <span className="font-medium">{values.page}</span> of{' '}
           <span className="font-medium">{data?.nbPages}</span> from{' '}
           <span className="font-medium">{data?.nbHits}</span> total hits
         </p>
@@ -257,6 +257,7 @@ function JobListPagination() {
           href={{
             query: filters.getParams({ page: values.page - 1 }),
             hash: 'main',
+            pathname: '/',
           }}
         >
           <a
@@ -274,6 +275,7 @@ function JobListPagination() {
           href={{
             query: getParams({ page: values.page + 1 }),
             hash: 'main',
+            pathname: '/',
           }}
         >
           <a
@@ -292,9 +294,9 @@ function JobListPagination() {
 }
 
 export default function IndexPage() {
-  const { values, getParams } = useFilters();
+  const { values } = useFilters();
   const input = useMemo(
-    () => ({ query: values.q, cursor: values.page }),
+    () => ({ query: values.q, cursor: values.page - 1 }),
     [values.page, values.q],
   );
   const jobsQuery = useQuery(['algolia.public.search', input], {
