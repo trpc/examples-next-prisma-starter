@@ -14,4 +14,4 @@ versions = ["minor", "patch"]
 usernames = ["dependabot"]
 
 [update]
-autoupdate_label = "♻️ autoupdate"
+autoupdate_label = ["♻️ autoupdate", "autoupdate"]
