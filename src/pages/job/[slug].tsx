@@ -1,5 +1,4 @@
 import {
-  AdjustmentsIcon,
   CalendarIcon,
   LocationMarkerIcon,
   OfficeBuildingIcon,
@@ -7,12 +6,10 @@ import {
 import { Footer } from 'components/Footer';
 import { Main } from 'components/Main';
 import { useIsDev } from 'hooks/useIsDev';
+import { JobPostingJsonLd } from 'next-seo';
 import { useRouter } from 'next/dist/client/router';
-import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import { useQuery } from 'utils/trpc';
-import { JobPostingJsonLd } from 'next-seo';
-import { NextWebVitalsMetric } from 'next/dist/next-server/lib/utils';
 
 export default function JobPage() {
   const slug = useRouter().query.slug as string;
@@ -20,7 +17,6 @@ export default function JobPage() {
   const query = useQuery(['job.public.bySlug', slug]);
 
   const item = query.data;
-  console.log('job', item);
   const isDev = useIsDev();
 
   return (

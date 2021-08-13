@@ -3,7 +3,7 @@ import { httpBatchLink } from '@trpc/client/links/httpBatchLink';
 import { loggerLink } from '@trpc/client/links/loggerLink';
 import { withTRPC } from '@trpc/next';
 import { DefaultSeo } from 'next-seo';
-import { AppType } from 'next/dist/next-server/lib/utils';
+import { AppType } from 'next/dist/shared/lib/utils';
 import { useEffect } from 'react';
 import { AppRouter } from 'server/routers/app';
 import 'styles/global.css';
