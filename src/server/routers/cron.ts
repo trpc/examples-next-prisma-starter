@@ -46,8 +46,8 @@ export const cronRouter = createRouter()
   })
   .query('keep-fresh', {
     // endpoint for periodically fetching home page and keeping it edge-cached
-    async resolve({ ctx }) {
-      const res = await fetch(ctx.APP_URL);
+    async resolve() {
+      const res = await fetch(`https://typescript.careers`);
       if (!res.ok) {
         throw new Error(`Status ${res.status}`);
       }
