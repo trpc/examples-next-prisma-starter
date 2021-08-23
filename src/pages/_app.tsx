@@ -43,21 +43,6 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 export default withTRPC<AppRouter>({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   config({ ctx }) {
-    // for app caching with SSR see https://trpc.io/docs/caching
-
-    if (ctx?.req?.url && !process.browser) {
-      const parts = new URL(`http://localhost` + ctx.req.url);
-
-      if (parts.pathname === '/' || parts.pathname.startsWith('/job/')) {
-        console.log('🏎 Caching:', parts.pathname);
-        // cache full page for 1 day + revalidate once every second
-        const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
-        ctx.res?.setHeader(
-          'Cache-Control',
-          `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
-        );
-      }
-    }
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
@@ -97,4 +82,24 @@ export default withTRPC<AppRouter>({
    * @link https://trpc.io/docs/ssr
    */
   ssr: true,
+  responseMeta({ clientErrors, ctx }) {
+    if (clientErrors.length) {
+      // propagate http first error from API calls
+      return {
+        status: clientErrors[0].data?.httpStatus ?? 500,
+      };
+    }
+    const parts = new URL(`http://localhost` + ctx.req?.url);
+    if (parts.pathname === '/' || parts.pathname.startsWith('/job/')) {
+      console.log('🏎 Caching:', parts.pathname);
+      // cache full page for 1 day + revalidate once every second
+      const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+      return {
+        'Cache-Control': `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+      };
+    }
+    // for app caching with SSR see https://trpc.io/docs/caching
+
+    return {};
+  },
 })(MyApp);
