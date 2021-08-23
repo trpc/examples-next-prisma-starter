@@ -92,11 +92,14 @@ export async function alogliaReindex(opts: { flush?: boolean } = {}) {
   const since = opts.flush ? null : lastReindex;
   const items = await getAlgoliaEntries(since);
 
+  console.log('♻️', { since });
   since
     ? await algoliaIndex.saveObjects(items)
     : await algoliaIndex.replaceAllObjects(items);
 
+  console.log('♻️', { now });
   await setAppState({ lastReindex: now });
+  console.log('♻️ updating settings');
   await updateSettings();
 
   return {

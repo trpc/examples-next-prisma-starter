@@ -20,10 +20,22 @@ export default trpcNext.createNextApiHandler({
       console.error('❌ ❌ ❌ Something went wrong', error);
     }
   },
-  /**
-   * Enable query batching
-   */
-  batching: {
-    enabled: true,
+  responseMeta({ paths, ctx, errors }) {
+    // check if it's a query & public
+    if (
+      errors.length === 0 &&
+      ctx?.req.method === 'GET' &&
+      paths?.every((path) => path.includes('public'))
+    ) {
+      console.log('🏎 Caching:', ctx.req.url);
+      // cache request for 1 day + revalidate once every second
+      const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
+      return {
+        headers: {
+          'cache-control': `s-maxage=1, stale-while-revalidate=${ONE_DAY_IN_SECONDS}`,
+        },
+      };
+    }
+    return {};
   },
 });

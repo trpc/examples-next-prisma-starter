@@ -28,7 +28,7 @@ export const jobRouter = createRouter()
         },
       });
       if (!job) {
-        throw new TRPCError({ code: 'PATH_NOT_FOUND' });
+        throw new TRPCError({ code: 'NOT_FOUND' });
       }
       const isHtmlTest = /<\/?[a-z][\s\S]*>/i;
       const $wasHtml = isHtmlTest.test(job.text);

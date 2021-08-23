@@ -865,38 +865,38 @@
   resolved "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
   integrity sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==
 
-"@trpc/client@^8.4.2":
-  version "8.4.2"
-  resolved "https://registry.npmjs.org/@trpc/client/-/client-8.4.2.tgz#912288d6a3bbfa9850bd39a0b3f7ce11effe8511"
-  integrity sha512-WxPIHC6sibZ+yE2GnPadvv43fO9rPqtgknkzyTuZtrBexjq9YuzuUENrw2gjeougFal9O4MZ13OJNwTbQ43PRg==
+"@trpc/client@^9.0.0-alpha.6":
+  version "9.0.0-alpha.6"
+  resolved "https://registry.npmjs.org/@trpc/client/-/client-9.0.0-alpha.6.tgz#c64701408c569519fea4945ff3143ed9e21cd581"
+  integrity sha512-+yXlmo/UvpFKNpuo1IAz0cOzj2ejurFiF9Dop/L48V0OSCDVXauAKcRI6Jq+f4zxnosQ2NP06i1AseYXvFsEFw==
   dependencies:
     "@babel/runtime" "^7.9.0"
-    "@trpc/server" "^8.4.2"
+    "@trpc/server" "^9.0.0-alpha.6"
 
-"@trpc/next@^8.4.2":
-  version "8.4.2"
-  resolved "https://registry.npmjs.org/@trpc/next/-/next-8.4.2.tgz#31a082072cc576fd72a539a755b0daafc6828dcb"
-  integrity sha512-Z8iRMGnRvm0NMPmtKeUqoe3r3EO2BMrFvpjbUHh/FEPpQc3s3zvJcmOa4k0aC7RYikFqK+nMwEFnCVNaEXhvaQ==
+"@trpc/next@^9.0.0-alpha.6":
+  version "9.0.0-alpha.6"
+  resolved "https://registry.npmjs.org/@trpc/next/-/next-9.0.0-alpha.6.tgz#7d9707bdfa41c06ed0d1fd01562568bc63998fc4"
+  integrity sha512-FAqdX+ocfYHw4LvEih8OyJ2TcsjOb4v4Ts4h8xnOb3Q+MRXRjYdbvII+0dBXZnlWt4xZVWznYNfpfIXBIHU01Q==
   dependencies:
     "@babel/runtime" "^7.9.0"
-    "@trpc/client" "^8.4.2"
-    "@trpc/react" "^8.4.2"
-    "@trpc/server" "^8.4.2"
+    "@trpc/client" "^9.0.0-alpha.6"
+    "@trpc/react" "^9.0.0-alpha.6"
+    "@trpc/server" "^9.0.0-alpha.6"
     react-ssr-prepass "^1.4.0"
 
-"@trpc/react@^8.4.2":
-  version "8.4.2"
-  resolved "https://registry.npmjs.org/@trpc/react/-/react-8.4.2.tgz#9f78e966fad81f96845ee8d9e02175376fa7d5a0"
-  integrity sha512-dAcSIrxPFVkX1/+FsJXLaiDNEY6rUe+WRYfnip+fslBiY8CcmPRZr4yASgdJqdrihpgSDi5tfdXrcsEY8jcLDA==
+"@trpc/react@^9.0.0-alpha.6":
+  version "9.0.0-alpha.6"
+  resolved "https://registry.npmjs.org/@trpc/react/-/react-9.0.0-alpha.6.tgz#279bad36b20e3a195ee614b862dcb77e9a3225de"
+  integrity sha512-AkRx4peysJqduW1Bo5qKm4QbzFMDkR66ijVk7pCQtYcQvbyC0iDdUI6i6sPriBMTWUimlyUZX9iNTTmocFHvog==
   dependencies:
     "@babel/runtime" "^7.9.0"
-    "@trpc/client" "^8.4.2"
-    "@trpc/server" "^8.4.2"
+    "@trpc/client" "^9.0.0-alpha.6"
+    "@trpc/server" "^9.0.0-alpha.6"
 
-"@trpc/server@^8.4.2":
-  version "8.4.2"
-  resolved "https://registry.npmjs.org/@trpc/server/-/server-8.4.2.tgz#925ea2637a8327cedad8accd7ead6de9ee148ba2"
-  integrity sha512-i00omlfV5t0t3GMKzIFJsv2Uu2xqL998OGG8TSV/82aGv2a9AYuTP1yjNKnoAH+oc908r0N7ak1oXI3FZ3vEKw==
+"@trpc/server@^9.0.0-alpha.6":
+  version "9.0.0-alpha.6"
+  resolved "https://registry.npmjs.org/@trpc/server/-/server-9.0.0-alpha.6.tgz#a3e3a62b1ce41cc82868b9e0dac62c3dbc9a1f48"
+  integrity sha512-kzkdrOk5xlcUSzBPH9h2j3zIz1tdwy9W0BmE8g3MiV56OEjT0STO84XiaLral9h7u/X7t4EkmkSi/8jBPOR89w==
   dependencies:
     tslib "^2.1.0"
 
