@@ -8,6 +8,7 @@ import { Main } from 'components/Main';
 import { useIsDev } from 'hooks/useIsDev';
 import { JobPostingJsonLd } from 'next-seo';
 import { useRouter } from 'next/dist/client/router';
+import NextError from 'next/error';
 import ReactMarkdown from 'react-markdown';
 import { useQuery } from 'utils/trpc';
 
@@ -19,6 +20,12 @@ export default function JobPage() {
   const item = query.data;
   const isDev = useIsDev();
 
+  if (query.error) {
+    const statusCode = query.error.data?.httpStatus ?? 500;
+    const title = query.error.message;
+
+    return <NextError {...{ title, statusCode }} />;
+  }
   return (
     <>
       <Main>
