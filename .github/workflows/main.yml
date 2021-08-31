@@ -25,11 +25,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - uses: microsoft/playwright-github-action@v1
-
       - name: Install deps and build (with cache)
         uses: bahmutov/npm-install@v1
 
+      - name: Next.js cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-${{ runner.node }}--nextjs
+
+      - run: yarn playwright install-deps
       - run: yarn lint
       - run: yarn build-vercel
       - run: yarn test-start
