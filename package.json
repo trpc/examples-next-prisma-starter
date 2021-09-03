@@ -51,7 +51,7 @@
     "@trpc/server": "^9.0.0-alpha.7",
     "@types/jest": "^27.0.1",
     "@types/lodash": "^4.14.172",
-    "@types/node": "^16.4.8",
+    "@types/node": "^16.7.10",
     "@types/node-fetch": "^2.5.12",
     "@types/react": "^17.0.19",
     "@types/turndown": "^5.0.1",
