@@ -53,13 +53,13 @@ model Job {
   jobType     JobType  @default(UNKNOWN)
   category    String?
 
-  company   Company @relation(fields: [companyId], references: [id])
+  company   Company @relation(fields: [companyId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   companyId String
 
   sourceSlug String
   sourceKey  String
   sourceJSON String?
-  source     Source  @relation(fields: [sourceSlug], references: [slug])
+  source     Source  @relation(fields: [sourceSlug], references: [slug], onDelete: Cascade, onUpdate: Cascade)
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

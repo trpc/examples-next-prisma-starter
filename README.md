@@ -12,14 +12,20 @@
   - ✅ E2E testing with [Playwright](https://playwright.dev/)
   - ✅ Linting
 
+### Requirements
 
-## Setup
+- Docker (for running postgres)
+- Node
+- yarn
+
+
+### Start project
 
 ```bash
 npx create-next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter
 cd trpc-prisma-starter
 yarn
-yarn dev
+yarn dx
 ```
 
 ## Files of note
@@ -56,13 +62,6 @@ yarn test-dev # runs e2e tests on dev
 yarn test-start # runs e2e tests on `next start` - build required before
 yarn dev-nuke # resets local db
 ```
-
-## ℹ️ How to switch from SQLite to Postgres
-
-How to switch to postgres
-
-- Remove migrations: `rm -rf ./prisma/migrations`
-- Update: `./prisma/schema.prisma` (see commented code)
 
 ---
 
