@@ -12,8 +12,14 @@
   - ✅ E2E testing with [Playwright](https://playwright.dev/)
   - ✅ Linting
 
+### Requirements
 
-## Setup
+- Docker (for running postgres)
+- Node
+- yarn
+
+
+### Start project
 
 ```bash
 npx create-next-app --example https://github.com/trpc/trpc --example-path examples/next-prisma-starter trpc-prisma-starter

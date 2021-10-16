@@ -11,12 +11,11 @@
     "build-vercel:3-seed": "yarn seed",
     "build-vercel:4-build-vercel": "next build",
     "build-vercel": "run-s build-vercel:*",
-    "dev": "yarn dx:next",
-    "dx:migrations": "yarn generate && yarn seed",
-    "dx:next": "next dev",
-    "dx:studio": "yarn studio",
-    "dx": "yarn migrate-dev && run-p dx:* --print-label",
-    "dev-nuke": "rm -rf prisma/*.db**",
+    "dev": "next dev",
+    "db-up": "docker-compose up -d",
+    "db-migrate": "yarn prisma migrate dev",
+    "db-nuke": "docker-compose down --volumes --remove-orphans",
+    "dx": "cross-env DATABASE_URL=postgresql://postgres:@localhost:5433/typescriptcareers run-s db-up db-migrate dev",
     "generate": "prisma generate",
     "migrate-dev": "prisma migrate dev",
     "migrate": "prisma migrate deploy",
@@ -95,5 +94,8 @@
   },
   "publishConfig": {
     "access": "restricted"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
   }
 }
