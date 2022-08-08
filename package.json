@@ -1,6 +1,6 @@
 {
   "name": "@examples/next-starter",
-  "version": "9.26.2",
+  "version": "9.27.0",
   "private": true,
   "scripts": {
     "build:1-migrate": "prisma migrate deploy",
@@ -33,10 +33,10 @@
   },
   "dependencies": {
     "@prisma/client": "^3.0.1",
-    "@trpc/client": "^9.26.2",
-    "@trpc/next": "^9.26.2",
-    "@trpc/react": "^9.26.2",
-    "@trpc/server": "^9.26.2",
+    "@trpc/client": "^9.27.0",
+    "@trpc/next": "^9.27.0",
+    "@trpc/react": "^9.27.0",
+    "@trpc/server": "^9.27.0",
     "clsx": "^1.1.1",
     "next": "^12.1.6",
     "react": "^18.1.0",
@@ -51,7 +51,7 @@
     "@types/jest": "^27.0.1",
     "@types/node": "^17.0.10",
     "@types/react": "^18.0.9",
-    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.14.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "^12.0.0",
