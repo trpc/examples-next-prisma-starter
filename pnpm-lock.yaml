@@ -1,25 +1,21 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@prisma/client':
     specifier: ^4.14.1
     version: 4.16.2(prisma@4.16.2)
   '@tanstack/react-query':
-    specifier: ^5.0.0
-    version: 5.17.14(react@18.2.0)
+    specifier: ^5.17.15
+    version: 5.17.15(react@18.2.0)
   '@trpc/client':
     specifier: next
     version: 11.0.0-next-beta.193
   '@trpc/next':
     specifier: next
-    version: 11.0.0-next-beta.193(@tanstack/react-query@5.17.14)(@trpc/client@11.0.0-next-beta.193)(@trpc/react-query@11.0.0-next-beta.193)(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+    version: 11.0.0-next-beta.193(@tanstack/react-query@5.17.15)(@trpc/client@11.0.0-next-beta.193)(@trpc/react-query@11.0.0-next-beta.193)(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
   '@trpc/react-query':
     specifier: next
-    version: 11.0.0-next-beta.193(@tanstack/react-query@5.17.14)(@trpc/client@11.0.0-next-beta.193)(react-dom@18.2.0)(react@18.2.0)
+    version: 11.0.0-next-beta.193(@tanstack/react-query@5.17.15)(@trpc/client@11.0.0-next-beta.193)(react-dom@18.2.0)(react@18.2.0)
   '@trpc/server':
     specifier: next
     version: 11.0.0-next-beta.193
@@ -830,16 +826,16 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@tanstack/query-core@5.17.14:
-    resolution: {integrity: sha512-k56eLuGfO8Rih0SqFJKq+XGrk3rmyiGBcNmbL+P+IiaRBeQtymkCgh5A2+v63SDGKzjaiBUSlbTLQcMCD6boQw==}
+  /@tanstack/query-core@5.17.15:
+    resolution: {integrity: sha512-QURxpu77/ICA4d61aPvV7EcJ2MwmksxUejKBaq/xLcO2TUJAlXf4PFKHC/WxnVFI/7F1jeLx85AO3Vpk0+uBXw==}
     dev: false
 
-  /@tanstack/react-query@5.17.14(react@18.2.0):
-    resolution: {integrity: sha512-yFGs/KIB2ionNrjkL2EZSL4kyFcijGOQUheQU3TxCv58GY3JoNMrmvfT6T3J75seRUE1EscxJT+h7WDr4AITJw==}
+  /@tanstack/react-query@5.17.15(react@18.2.0):
+    resolution: {integrity: sha512-9qur91mOihaUN7pXm6ioDtS+4qgkBcCiIaZyvi3lZNcQZsrMGCYZ+eP3hiFrV4khoJyJrFUX1W0NcCVlgwNZxQ==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-core': 5.17.14
+      '@tanstack/query-core': 5.17.15
       react: 18.2.0
     dev: false
 
@@ -853,7 +849,7 @@ packages:
     resolution: {integrity: sha512-oF/Tg6ue12v8EjtbLEjiuLddbFovdpwK1hGPgZUesX1gtRiuWoJugpo4Xn2L1ESFhn1MVCZdAgXLj3qoNpXxIg==}
     dev: false
 
-  /@trpc/next@11.0.0-next-beta.193(@tanstack/react-query@5.17.14)(@trpc/client@11.0.0-next-beta.193)(@trpc/react-query@11.0.0-next-beta.193)(next@14.0.4)(react-dom@18.2.0)(react@18.2.0):
+  /@trpc/next@11.0.0-next-beta.193(@tanstack/react-query@5.17.15)(@trpc/client@11.0.0-next-beta.193)(@trpc/react-query@11.0.0-next-beta.193)(next@14.0.4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-ttbv4TPptMhJLqOwZNRymB8RMD4dsdyh4xZARCKG/8yF/XewP30hgWdHKl/zRzjDRmy6NtWzKycb5yI/99LO2A==}
     peerDependencies:
       '@tanstack/react-query': ^5.0.0
@@ -863,16 +859,16 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@tanstack/react-query': 5.17.14(react@18.2.0)
+      '@tanstack/react-query': 5.17.15(react@18.2.0)
       '@trpc/client': 11.0.0-next-beta.193
       '@trpc/core': 11.0.0-next-beta.193
-      '@trpc/react-query': 11.0.0-next-beta.193(@tanstack/react-query@5.17.14)(@trpc/client@11.0.0-next-beta.193)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/react-query': 11.0.0-next-beta.193(@tanstack/react-query@5.17.15)(@trpc/client@11.0.0-next-beta.193)(react-dom@18.2.0)(react@18.2.0)
       next: 14.0.4(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@trpc/react-query@11.0.0-next-beta.193(@tanstack/react-query@5.17.14)(@trpc/client@11.0.0-next-beta.193)(react-dom@18.2.0)(react@18.2.0):
+  /@trpc/react-query@11.0.0-next-beta.193(@tanstack/react-query@5.17.15)(@trpc/client@11.0.0-next-beta.193)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-cC9IB8LiViqZeHGUKnmYhi5nwpUd5wC3efidAUyX2jCQdwPiThZQJWcmtXfPmb9qXvERq6E40nu7cHQXlMDzrQ==}
     peerDependencies:
       '@tanstack/react-query': ^5.0.0
@@ -880,7 +876,7 @@ packages:
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
-      '@tanstack/react-query': 5.17.14(react@18.2.0)
+      '@tanstack/react-query': 5.17.15(react@18.2.0)
       '@trpc/client': 11.0.0-next-beta.193
       '@trpc/core': 11.0.0-next-beta.193
       react: 18.2.0
@@ -4447,3 +4443,7 @@ packages:
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
