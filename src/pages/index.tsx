@@ -1,13 +1,18 @@
-import { trpc } from '../utils/trpc';
+import { useTRPC } from '../utils/trpc';
 import type { NextPageWithLayout } from './_app';
 import type { inferProcedureInput } from '@trpc/server';
 import Link from 'next/link';
 import { Fragment } from 'react';
 import type { AppRouter } from '~/server/routers/_app';
 
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
+
 const IndexPage: NextPageWithLayout = () => {
-  const utils = trpc.useUtils();
-  const postsQuery = trpc.post.list.useInfiniteQuery(
+  const trpc = useTRPC();
+  const queryClient = useQueryClient();
+  const postsQuery = useInfiniteQuery(trpc.post.list.infiniteQueryOptions(
     {
       limit: 5,
     },
@@ -16,14 +21,14 @@ const IndexPage: NextPageWithLayout = () => {
         return lastPage.nextCursor;
       },
     },
-  );
+  ));
 
-  const addPost = trpc.post.add.useMutation({
+  const addPost = useMutation(trpc.post.add.mutationOptions({
     async onSuccess() {
       // refetches posts after a post is added
       await utils.post.list.invalidate();
     },
-  });
+  }));
 
   // prefetch all posts for instant navigation
   // useEffect(() => {
