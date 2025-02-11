@@ -15,17 +15,20 @@ importers:
         specifier: ^5.66.0
         version: 5.66.0(react@19.0.0)
       '@trpc/client':
-        specifier: next
-        version: 11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3)
+        specifier: tmp
+        version: 11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3)
       '@trpc/next':
-        specifier: next
-        version: 11.0.0-rc.761(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3))(@trpc/react-query@11.0.0-rc.761(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3))(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(next@15.1.7(@playwright/test@1.50.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
+        specifier: tmp
+        version: 11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/react-query@11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(next@15.1.7(@playwright/test@1.50.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
       '@trpc/react-query':
-        specifier: next
-        version: 11.0.0-rc.761(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
+        specifier: tmp
+        version: 11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
       '@trpc/server':
-        specifier: next
-        version: 11.0.0-rc.761(typescript@5.7.3)
+        specifier: tmp
+        version: 11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3)
+      '@trpc/tanstack-react-query':
+        specifier: tmp
+        version: 11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
       clsx:
         specifier: ^2.0.0
         version: 2.1.1
@@ -815,19 +818,19 @@ packages:
     peerDependencies:
       react: ^18 || ^19
 
-  '@trpc/client@11.0.0-rc.761':
-    resolution: {integrity: sha512-1Tm4pwdUi7mZbr1tkZMN4BSD2FhcWkh0oe0Hdg2HBgqUqQs9DcWdtearXp9xajed7oh0kjZ/ITZgTgtwczXcwA==}
+  '@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675':
+    resolution: {integrity: sha512-1dX52dAQT4flx8CrYLT80CGGz8cBDRYQnq0y+ECp49e8OpZLlBKiuV2M/ufDoCH/UbXaOHw76GvZpYtxESvisw==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.761+b7174a4f2
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
       typescript: '>=5.7.2'
 
-  '@trpc/next@11.0.0-rc.761':
-    resolution: {integrity: sha512-eqJ84ISco2Co5xGpVW0svil/RRmAWCaI8rkPPsVUXcLB/iEq8TRFcyyNnq2yqctCz8lYSbTm2DKbmrAmEKvebQ==}
+  '@trpc/next@11.0.0-alpha-tmp-query-optoins-codemod.675':
+    resolution: {integrity: sha512-lGQS+5N5vNGIgxLb0bNKrqApD74T1Qykzg6wp7CDeppDLTukl8lGkiJrmW2Yokocvn5KzBnHFXStrwZLVV0zhA==}
     peerDependencies:
-      '@tanstack/react-query': ^5.59.15
-      '@trpc/client': 11.0.0-rc.761+b7174a4f2
-      '@trpc/react-query': 11.0.0-rc.761+b7174a4f2
-      '@trpc/server': 11.0.0-rc.761+b7174a4f2
+      '@tanstack/react-query': ^5.62.8
+      '@trpc/client': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
+      '@trpc/react-query': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
       next: '*'
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -838,19 +841,29 @@ packages:
       '@trpc/react-query':
         optional: true
 
-  '@trpc/react-query@11.0.0-rc.761':
-    resolution: {integrity: sha512-ORquqFCJcqfg6TPGccXf/0bWX/wgQQ4SEP7iyzlVTafbH7HGWG40A9fXRE9jB0761v9G1zbh59Qot9F8w0Py7Q==}
+  '@trpc/react-query@11.0.0-alpha-tmp-query-optoins-codemod.675':
+    resolution: {integrity: sha512-ELFlYGIdGdejbeKXWtY+4NZMDNEfIyP0344ib6WKcG8iWEzqr3lgGrT17w5J8/jLvS9ycHr9y8ptDyELqXozYg==}
     peerDependencies:
       '@tanstack/react-query': ^5.62.8
-      '@trpc/client': 11.0.0-rc.761+b7174a4f2
-      '@trpc/server': 11.0.0-rc.761+b7174a4f2
+      '@trpc/client': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
       typescript: '>=5.7.2'
 
-  '@trpc/server@11.0.0-rc.761':
-    resolution: {integrity: sha512-VY2BV0ygS5QZUMELQagIs+HrUBRtE5BcwMWvvbBhLOUj2PqfFHUAOrlsrW24+Ic8pMxC+vf5mScy6XP3+GZvjA==}
+  '@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675':
+    resolution: {integrity: sha512-nnnkNNdzdmA+aWQvSBAsYh3OLSvRGPLFcQMIMhZho8h04HPGqWmkKmCxNigY5KmTWETs+VklF8DFWUajDcl+wQ==}
     peerDependencies:
+      typescript: '>=5.7.2'
+
+  '@trpc/tanstack-react-query@11.0.0-alpha-tmp-query-optoins-codemod.675':
+    resolution: {integrity: sha512-oGGel/hVL/mab+WPc+tuAehRBrNfzOHiQm1v571NwStimTFs2l4kd/QnkWYCwJeCGcf1XCHCNTsotMeOvt1F2g==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.62.8
+      '@trpc/client': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675+f1a99e824
+      react: '>=18.2.0'
+      react-dom: '>=18.2.0'
       typescript: '>=5.7.2'
 
   '@types/estree@1.0.6':
@@ -3217,34 +3230,43 @@ snapshots:
       '@tanstack/query-core': 5.66.0
       react: 19.0.0
 
-  '@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3)':
+  '@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3)':
     dependencies:
-      '@trpc/server': 11.0.0-rc.761(typescript@5.7.3)
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3)
       typescript: 5.7.3
 
-  '@trpc/next@11.0.0-rc.761(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3))(@trpc/react-query@11.0.0-rc.761(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3))(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(next@15.1.7(@playwright/test@1.50.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)':
+  '@trpc/next@11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/react-query@11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(next@15.1.7(@playwright/test@1.50.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)':
     dependencies:
-      '@trpc/client': 11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3)
-      '@trpc/server': 11.0.0-rc.761(typescript@5.7.3)
+      '@trpc/client': 11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3)
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3)
       next: 15.1.7(@playwright/test@1.50.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       typescript: 5.7.3
     optionalDependencies:
       '@tanstack/react-query': 5.66.0(react@19.0.0)
-      '@trpc/react-query': 11.0.0-rc.761(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
+      '@trpc/react-query': 11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)
 
-  '@trpc/react-query@11.0.0-rc.761(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)':
+  '@trpc/react-query@11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)':
     dependencies:
       '@tanstack/react-query': 5.66.0(react@19.0.0)
-      '@trpc/client': 11.0.0-rc.761(@trpc/server@11.0.0-rc.761(typescript@5.7.3))(typescript@5.7.3)
-      '@trpc/server': 11.0.0-rc.761(typescript@5.7.3)
+      '@trpc/client': 11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3)
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3)
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
       typescript: 5.7.3
 
-  '@trpc/server@11.0.0-rc.761(typescript@5.7.3)':
+  '@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3)':
     dependencies:
+      typescript: 5.7.3
+
+  '@trpc/tanstack-react-query@11.0.0-alpha-tmp-query-optoins-codemod.675(@tanstack/react-query@5.66.0(react@19.0.0))(@trpc/client@11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3))(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.3)':
+    dependencies:
+      '@tanstack/react-query': 5.66.0(react@19.0.0)
+      '@trpc/client': 11.0.0-alpha-tmp-query-optoins-codemod.675(@trpc/server@11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3))(typescript@5.7.3)
+      '@trpc/server': 11.0.0-alpha-tmp-query-optoins-codemod.675(typescript@5.7.3)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
       typescript: 5.7.3
 
   '@types/estree@1.0.6': {}
