@@ -5,30 +5,34 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 import type { AppRouter } from '~/server/routers/_app';
 
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMutation } from "@tanstack/react-query";
-import { useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 const IndexPage: NextPageWithLayout = () => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const postsQuery = useInfiniteQuery(trpc.post.list.infiniteQueryOptions(
-    {
-      limit: 5,
-    },
-    {
-      getNextPageParam(lastPage) {
-        return lastPage.nextCursor;
+  const postsQuery = useInfiniteQuery(
+    trpc.post.list.infiniteQueryOptions(
+      {
+        limit: 5,
       },
-    },
-  ));
+      {
+        getNextPageParam(lastPage) {
+          return lastPage.nextCursor;
+        },
+      },
+    ),
+  );
 
-  const addPost = useMutation(trpc.post.add.mutationOptions({
-    async onSuccess() {
-      // refetches posts after a post is added
-      await utils.post.list.invalidate();
-    },
-  }));
+  const addPost = useMutation(
+    trpc.post.add.mutationOptions({
+      async onSuccess() {
+        // refetches posts after a post is added
+        await queryClient.invalidateQueries(trpc.post.list.queryFilter());
+      },
+    }),
+  );
 
   // prefetch all posts for instant navigation
   // useEffect(() => {
