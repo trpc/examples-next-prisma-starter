@@ -5,8 +5,9 @@ import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
 import type { NextPageContext } from 'next';
 // ℹ️ Type-only import:
 // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export
-import type { AppRouter } from '~/server/routers/_app';
+import { type AppRouter } from '~/server/routers/_app';
 import { transformer } from './transformer';
+import { createTRPCContext } from '@trpc/tanstack-react-query';
 
 function getBaseUrl() {
   if (typeof window !== 'undefined') {
@@ -103,6 +104,8 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
    */
   transformer,
 });
+
+export const { TRPCProvider, useTRPC } = createTRPCContext<AppRouter>();
 
 export type RouterInput = inferRouterInputs<AppRouter>;
 export type RouterOutput = inferRouterOutputs<AppRouter>;
