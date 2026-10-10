@@ -59,9 +59,11 @@ const IndexPage: NextPageWithLayout = () => {
 
       <div className="flex flex-col py-8 items-start gap-y-2">
         <div className="flex flex-col"></div>
-        <h2 className="text-3xl font-semibold">
+        <h2 className="text-3xl font-semibold flex items-center gap-2">
           Latest Posts
-          {postsQuery.status === 'pending' && '(loading)'}
+          {postsQuery.status === 'pending' && (
+            <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent"></div>
+          )}
         </h2>
 
         <button
