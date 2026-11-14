@@ -1,11 +1,11 @@
-import { buttonVariants } from '@shared/ui/components/button';
+import { buttonVariants } from '../shared-ui/components/button';
 import {
   Empty,
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyTitle,
-} from '@shared/ui/components/empty';
+} from '../shared-ui/components/empty';
 import Link from 'next/link';
 
 export default function Custom404() {

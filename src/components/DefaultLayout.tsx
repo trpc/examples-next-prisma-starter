@@ -1,4 +1,4 @@
-import { buttonVariants } from '@shared/ui/components/button';
+import { buttonVariants } from '../shared-ui/components/button';
 import { BookOpenIcon } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';

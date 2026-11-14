@@ -5,9 +5,9 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from '@shared/ui/components/alert';
-import { Badge } from '@shared/ui/components/badge';
-import { Button } from '@shared/ui/components/button';
+} from '../shared-ui/components/alert';
+import { Badge } from '../shared-ui/components/badge';
+import { Button } from '../shared-ui/components/button';
 import {
   Card,
   CardContent,
@@ -15,14 +15,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@shared/ui/components/card';
+} from '../shared-ui/components/card';
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from '@shared/ui/components/field';
-import { Input } from '@shared/ui/components/input';
+} from '../shared-ui/components/field';
+import { Input } from '../shared-ui/components/input';
 import {
   Item,
   ItemActions,
@@ -30,10 +30,10 @@ import {
   ItemDescription,
   ItemGroup,
   ItemTitle,
-} from '@shared/ui/components/item';
-import { Skeleton } from '@shared/ui/components/skeleton';
-import { Spinner } from '@shared/ui/components/spinner';
-import { Textarea } from '@shared/ui/components/textarea';
+} from '../shared-ui/components/item';
+import { Skeleton } from '../shared-ui/components/skeleton';
+import { Spinner } from '../shared-ui/components/spinner';
+import { Textarea } from '../shared-ui/components/textarea';
 import type { inferProcedureInput } from '@trpc/server';
 import { ChevronRightIcon, CircleAlertIcon } from 'lucide-react';
 import Link from 'next/link';
