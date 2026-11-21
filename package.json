@@ -27,19 +27,23 @@
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
+    "@base-ui/react": "1.9.0",
     "@prisma/client": "^6.7.0",
-    "@shared/ui": "workspace:*",
     "@tanstack/react-query": "^5.107.1",
-    "@trpc/client": "npm:@trpc/client",
-    "@trpc/server": "npm:@trpc/server",
-    "@trpc/tanstack-react-query": "npm:@trpc/tanstack-react-query",
+    "@trpc/client": "latest",
+    "@trpc/server": "latest",
+    "@trpc/tanstack-react-query": "latest",
+    "class-variance-authority": "0.7.1",
     "clsx": "^2.0.0",
+    "cn": "0.5.2",
     "lucide-react": "1.70.0",
     "next": "^15.5.29",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "server-only": "^0.0.1",
+    "shadcn": "4.23.0",
     "superjson": "^2.2.6",
+    "tw-animate-css": "1.4.0",
     "zod": "^4.2.1"
   },
   "devDependencies": {
@@ -48,23 +52,18 @@
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "dotenv": "^16.0.1",
-    "npm-run-all2": "catalog:",
-    "oxfmt": "catalog:",
+    "npm-run-all2": "^9.0.4",
+    "oxfmt": "^0.77.0",
     "oxlint": "^1.92.0",
     "oxlint-tsgolint": "^7.0.2006",
     "postcss": "^8.5.32",
     "prisma": "^6.7.0",
     "start-server-and-test": "^1.12.0",
-    "tailwindcss": "catalog:www",
+    "tailwindcss": "4.3.5",
     "tsx": "^4.23.15",
     "typescript": "^5.9.2",
     "vite": "^8.3.3",
     "vitest": "^5.0.5"
-  },
-  "dependenciesMeta": {
-    "@shared/ui": {
-      "injected": true
-    }
   },
   "publishConfig": {
     "access": "restricted"

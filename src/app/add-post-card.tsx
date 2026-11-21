@@ -4,24 +4,24 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from '@shared/ui/components/alert';
-import { Button } from '@shared/ui/components/button';
+} from '../shared-ui/components/alert';
+import { Button } from '../shared-ui/components/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@shared/ui/components/card';
+} from '../shared-ui/components/card';
 import {
   Field,
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from '@shared/ui/components/field';
-import { Input } from '@shared/ui/components/input';
-import { Spinner } from '@shared/ui/components/spinner';
-import { Textarea } from '@shared/ui/components/textarea';
+} from '../shared-ui/components/field';
+import { Input } from '../shared-ui/components/input';
+import { Spinner } from '../shared-ui/components/spinner';
+import { Textarea } from '../shared-ui/components/textarea';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { inferProcedureInput } from '@trpc/server';
 import { CircleAlertIcon } from 'lucide-react';
