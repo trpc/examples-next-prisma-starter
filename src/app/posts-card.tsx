@@ -5,8 +5,8 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from '@shared/ui/components/alert';
-import { Button } from '@shared/ui/components/button';
+} from '../shared-ui/components/alert';
+import { Button } from '../shared-ui/components/button';
 import {
   Card,
   CardContent,
@@ -14,7 +14,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@shared/ui/components/card';
+} from '../shared-ui/components/card';
 import {
   Item,
   ItemActions,
@@ -22,9 +22,9 @@ import {
   ItemDescription,
   ItemGroup,
   ItemTitle,
-} from '@shared/ui/components/item';
-import { Skeleton } from '@shared/ui/components/skeleton';
-import { Spinner } from '@shared/ui/components/spinner';
+} from '../shared-ui/components/item';
+import { Skeleton } from '../shared-ui/components/skeleton';
+import { Spinner } from '../shared-ui/components/spinner';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fromHandle } from '@trpc/tanstack-react-query/unstable-handles';
 import type { inferInfiniteQueryHandle } from '@trpc/tanstack-react-query/unstable-handles';

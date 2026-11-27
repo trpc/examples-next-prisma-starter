@@ -7,23 +7,23 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@shared/ui/components/breadcrumb';
-import { buttonVariants } from '@shared/ui/components/button';
+} from '../../../shared-ui/components/breadcrumb';
+import { buttonVariants } from '../../../shared-ui/components/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@shared/ui/components/card';
+} from '../../../shared-ui/components/card';
 import {
   Empty,
   EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyTitle,
-} from '@shared/ui/components/empty';
-import { Skeleton } from '@shared/ui/components/skeleton';
+} from '../../../shared-ui/components/empty';
+import { Skeleton } from '../../../shared-ui/components/skeleton';
 import { useQuery } from '@tanstack/react-query';
 import { fromHandle } from '@trpc/tanstack-react-query/unstable-handles';
 import type { inferQueryHandle } from '@trpc/tanstack-react-query/unstable-handles';

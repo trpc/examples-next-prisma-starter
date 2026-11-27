@@ -5,8 +5,8 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from '@shared/ui/components/alert';
-import { Button } from '@shared/ui/components/button';
+} from '../shared-ui/components/alert';
+import { Button } from '../shared-ui/components/button';
 import { CircleAlertIcon } from 'lucide-react';
 
 /**

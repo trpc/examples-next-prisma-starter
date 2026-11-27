@@ -1,4 +1,4 @@
-import { Badge } from '@shared/ui/components/badge';
+import { Badge } from '../shared-ui/components/badge';
 import {
   ensureInfiniteEntry,
   loadHandles,
